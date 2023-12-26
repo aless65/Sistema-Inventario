@@ -1,4 +1,5 @@
 using AcademiaFS.Proyecto.Inventario.Domain;
+using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.EntityFrameworkCore;
 using SistemaInventario._Features.Empleados;
 using SistemaInventario._Features.Lotes;
@@ -32,6 +33,8 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("SistemaInventario");
 builder.Services.AddDbContext<InventarioAjmContext>(o => o.UseSqlServer(connectionString));
+
+builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 

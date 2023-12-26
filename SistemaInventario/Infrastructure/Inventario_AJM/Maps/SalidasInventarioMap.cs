@@ -13,6 +13,7 @@ namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Maps
             builder.ToTable("SalidasInventario");
 
             builder.Property(e => e.Activo).HasDefaultValue(true);
+            builder.Property(e => e.Fecha).HasColumnType("datetime");
             builder.Property(e => e.FechaCreacion).HasColumnType("datetime");
             builder.Property(e => e.FechaModificacion).HasColumnType("datetime");
             builder.Property(e => e.Total).HasColumnType("decimal(18, 2)");

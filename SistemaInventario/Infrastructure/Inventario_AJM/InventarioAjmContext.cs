@@ -40,6 +40,16 @@ namespace SistemaInventario.Infrastructure.Inventario_AJM
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmpleadoMap());
+            modelBuilder.ApplyConfiguration(new EstadoMap());
+            modelBuilder.ApplyConfiguration(new LoteMap());
+            modelBuilder.ApplyConfiguration(new PerfilMap());
+            modelBuilder.ApplyConfiguration(new PerfilesPorPermisoMap());
+            modelBuilder.ApplyConfiguration(new PermisoMap());
+            modelBuilder.ApplyConfiguration(new ProductoMap());
+            modelBuilder.ApplyConfiguration(new SalidasInventarioMap());
+            modelBuilder.ApplyConfiguration(new SalidasInventarioDetalleMap());
+            modelBuilder.ApplyConfiguration(new SucursalMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
         }
     }
 }
