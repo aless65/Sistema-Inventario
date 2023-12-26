@@ -1,11 +1,47 @@
+using AcademiaFS.Proyecto.Inventario.Domain;
+using Microsoft.EntityFrameworkCore;
+using SistemaInventario._Features.Empleados;
+using SistemaInventario._Features.Lotes;
+using SistemaInventario.Infrastructure;
+using SistemaInventario.Infrastructure.Inventario_AJM;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.Services.AddSwaggerForFsIdentityServer(opt =>
+//{
+//    opt.Title = "Inventario";
+//    opt.Description = "Wow";
+//    opt.Version = "v1";
+//});
+
+var connectionString = builder.Configuration.GetConnectionString("SistemaInventario");
+builder.Services.AddDbContext<InventarioAjmContext>(o => o.UseSqlServer(connectionString));
+
+builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddTransient<EmpleadoService>();
+builder.Services.AddTransient<LoteService>();
+builder.Services.AddTransient<ProductoService>();
+builder.Services.AddTransient<SalidasInventarioService>();
+builder.Services.AddTransient<SucursalService>();
+builder.Services.AddTransient<UsuarioService>();
+builder.Services.AddTransient<DomainService>();
 
 var app = builder.Build();
 

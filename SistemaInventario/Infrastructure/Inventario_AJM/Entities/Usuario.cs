@@ -37,7 +37,7 @@ public partial class Usuario
 
     public virtual Empleado? IdEmpleadoNavigation { get; set; }
 
-    public virtual Perfile? IdPerfilNavigation { get; set; }
+    public virtual Perfil? IdPerfilNavigation { get; set; }
 
     public virtual Usuario IdUsuarioCreacionNavigation { get; set; } = null!;
 
@@ -51,9 +51,9 @@ public partial class Usuario
 
     public virtual ICollection<Lote> LoteIdUsuarioModificacionNavigations { get; set; } = new List<Lote>();
 
-    public virtual ICollection<Perfile> PerfileIdUsuarioCreacionNavigations { get; set; } = new List<Perfile>();
+    public virtual ICollection<Perfil> PerfileIdUsuarioCreacionNavigations { get; set; } = new List<Perfil>();
 
-    public virtual ICollection<Perfile> PerfileIdUsuarioModificacionNavigations { get; set; } = new List<Perfile>();
+    public virtual ICollection<Perfil> PerfileIdUsuarioModificacionNavigations { get; set; } = new List<Perfil>();
 
     public virtual ICollection<Permiso> PermisoIdUsuarioCreacionNavigations { get; set; } = new List<Permiso>();
 

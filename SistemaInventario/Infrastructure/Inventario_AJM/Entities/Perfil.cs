@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
-public partial class Perfile
+public partial class Perfil
 {
     public int IdPerfil { get; set; }
 
