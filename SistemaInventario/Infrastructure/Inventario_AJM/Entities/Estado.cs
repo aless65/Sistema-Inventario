@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
-public partial class Permiso
+public partial class Estado
 {
-    public int IdPermiso { get; set; }
+    public int IdEstado { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string? Nombre { get; set; }
 
     public bool Activo { get; set; }
 
@@ -22,4 +22,6 @@ public partial class Permiso
     public virtual Usuario IdUsuarioCreacionNavigation { get; set; } = null!;
 
     public virtual Usuario? IdUsuarioModificacionNavigation { get; set; }
+
+    public virtual ICollection<SalidasInventario> SalidasInventarios { get; set; } = new List<SalidasInventario>();
 }

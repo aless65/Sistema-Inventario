@@ -5808,9 +5808,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amedina\\Desktop\\GitHub\\Sistema-Inventario\\SistemaInventario\\SistemaInventario.csproj",
-      "projectName": "SistemaInventario",
-      "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\Sistema-Inventario\\SistemaInventario\\SistemaInventario.csproj",
+      "projectUniqueName": "C:\\Users\\amedina\\Desktop\\GitHub\\Sistema-Inventario\\SistemaInventario\\AcademiaFS.Proyecto.Inventario.csproj",
+      "projectName": "AcademiaFS.Proyecto.Inventario",
+      "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\Sistema-Inventario\\SistemaInventario\\AcademiaFS.Proyecto.Inventario.csproj",
       "packagesPath": "C:\\Users\\amedina\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\amedina\\Desktop\\GitHub\\Sistema-Inventario\\SistemaInventario\\obj\\",
       "projectStyle": "PackageReference",

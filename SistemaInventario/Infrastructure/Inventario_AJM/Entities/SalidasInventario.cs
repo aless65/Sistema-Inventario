@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
 public partial class SalidasInventario
 {
@@ -33,7 +33,7 @@ public partial class SalidasInventario
 
     public virtual Estado IdEstadoNavigation { get; set; } = null!;
 
-    public virtual Sucursale IdSucursalNavigation { get; set; } = null!;
+    public virtual Sucursal IdSucursalNavigation { get; set; } = null!;
 
     public virtual Usuario IdUsuarioCreacionNavigation { get; set; } = null!;
 

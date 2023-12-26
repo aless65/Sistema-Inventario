@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
 public partial class PerfilesPorPermiso
 {

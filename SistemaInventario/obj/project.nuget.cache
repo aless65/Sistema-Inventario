@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kJjgs4IMR4fEjCzmCk+IUb6vWMuZTl8g/ZPHbQXMlzJ89wFJDsvzLgFkPpL39YHtONwJQVTGYjtsJz71tTfYlw==",
+  "dgSpecHash": "CKinUnAW0fp9JAnk0+IMt+ZRAfB6zXlWDbs/Y0rRJPXlAi7pj7eHpHIR1OqOuWcqDMVteox0oZF/g5KRCfjnfQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\amedina\\Desktop\\GitHub\\Sistema-Inventario\\SistemaInventario\\SistemaInventario.csproj",
+  "projectFilePath": "C:\\Users\\amedina\\Desktop\\GitHub\\Sistema-Inventario\\SistemaInventario\\AcademiaFS.Proyecto.Inventario.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\amedina\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\amedina\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

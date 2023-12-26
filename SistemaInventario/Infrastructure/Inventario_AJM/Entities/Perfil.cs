@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
-public partial class Empleado
+public partial class Perfile
 {
-    public int IdEmpleado { get; set; }
+    public int IdPerfil { get; set; }
 
-    public string Identidad { get; set; } = null!;
-
-    public string Nombres { get; set; } = null!;
-
-    public string Apellidos { get; set; } = null!;
-
-    public string Telefono { get; set; } = null!;
-
-    public string Direccion { get; set; } = null!;
+    public string Nombre { get; set; } = null!;
 
     public bool Activo { get; set; }
 

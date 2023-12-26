@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
-public partial class Producto
+public partial class Sucursal
 {
-    public int IdProducto { get; set; }
+    public int IdSucursal { get; set; }
 
     public string? Nombre { get; set; }
 
@@ -23,5 +23,5 @@ public partial class Producto
 
     public virtual Usuario? IdUsuarioModificacionNavigation { get; set; }
 
-    public virtual ICollection<Lote> Lotes { get; set; } = new List<Lote>();
+    public virtual ICollection<SalidasInventario> SalidasInventarios { get; set; } = new List<SalidasInventario>();
 }

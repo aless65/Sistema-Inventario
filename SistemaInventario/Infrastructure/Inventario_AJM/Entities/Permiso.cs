@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
-public partial class Perfile
+public partial class Permiso
 {
-    public int IdPerfil { get; set; }
+    public int IdPermiso { get; set; }
 
     public string Nombre { get; set; } = null!;
 
@@ -22,6 +22,4 @@ public partial class Perfile
     public virtual Usuario IdUsuarioCreacionNavigation { get; set; } = null!;
 
     public virtual Usuario? IdUsuarioModificacionNavigation { get; set; }
-
-    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }

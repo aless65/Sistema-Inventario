@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace SistemaInventario.Context;
@@ -33,7 +34,7 @@ public partial class InventarioAjmContext : DbContext
 
     public virtual DbSet<SalidasInventarioDetalle> SalidasInventarioDetalles { get; set; }
 
-    public virtual DbSet<Sucursale> Sucursales { get; set; }
+    public virtual DbSet<Sucursal> Sucursales { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -246,7 +247,7 @@ public partial class InventarioAjmContext : DbContext
                 .HasConstraintName("FK_SalidasInventarioDetalles_IdUsuarioModificacion_IdUsuario");
         });
 
-        modelBuilder.Entity<Sucursale>(entity =>
+        modelBuilder.Entity<Sucursal>(entity =>
         {
             entity.HasKey(e => e.IdSucursal).HasName("PK_Sucursales_IdSucursal");
 

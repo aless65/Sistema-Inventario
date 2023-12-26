@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
 public partial class Usuario
 {
@@ -75,7 +75,7 @@ public partial class Usuario
 
     public virtual ICollection<SalidasInventario> SalidasInventarioIdUsuarioRecibeNavigations { get; set; } = new List<SalidasInventario>();
 
-    public virtual ICollection<Sucursale> SucursaleIdUsuarioCreacionNavigations { get; set; } = new List<Sucursale>();
+    public virtual ICollection<Sucursal> SucursaleIdUsuarioCreacionNavigations { get; set; } = new List<Sucursal>();
 
-    public virtual ICollection<Sucursale> SucursaleIdUsuarioModificacionNavigations { get; set; } = new List<Sucursale>();
+    public virtual ICollection<Sucursal> SucursaleIdUsuarioModificacionNavigations { get; set; } = new List<Sucursal>();
 }

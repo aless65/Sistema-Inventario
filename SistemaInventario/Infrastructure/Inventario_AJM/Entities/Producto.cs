@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaInventario.Context;
+namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
-public partial class SalidasInventarioDetalle
+public partial class Producto
 {
-    public int IdSalidaDetalle { get; set; }
+    public int IdProducto { get; set; }
 
-    public int IdSalidaInventario { get; set; }
-
-    public int IdLote { get; set; }
-
-    public int CantidadProducto { get; set; }
+    public string? Nombre { get; set; }
 
     public bool Activo { get; set; }
 
@@ -23,9 +19,9 @@ public partial class SalidasInventarioDetalle
 
     public DateTime? FechaModificacion { get; set; }
 
-    public virtual Lote IdLoteNavigation { get; set; } = null!;
-
     public virtual Usuario IdUsuarioCreacionNavigation { get; set; } = null!;
 
     public virtual Usuario? IdUsuarioModificacionNavigation { get; set; }
+
+    public virtual ICollection<Lote> Lotes { get; set; } = new List<Lote>();
 }
