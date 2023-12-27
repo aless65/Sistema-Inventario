@@ -23,7 +23,7 @@
 
         public static string REPETIDO(string nombrePropiedad)
         {
-            return $"Este(a) '{nombrePropiedad}' ya existe";
+            return $"Este(a) {nombrePropiedad} ya existe";
         }
 
         public static string NO_EXISTE(string nombrePropiedad)

@@ -4,6 +4,8 @@ using AcademiaFS.Proyecto.Inventario.Utility;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Lotes
@@ -52,9 +54,16 @@ namespace SistemaInventario._Features.Lotes
 
                 return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal), Codigos.Success, Mensajes.OPERACION_EXITOSA("insertado"));
             }
-            catch
+            catch (DbUpdateException ex)
             {
+                var innerException = ex.InnerException;
+
+                if( innerException is SqlException sqlException )
+                    if(sqlException.Number == 2601 || sqlException.Number == 2627)
+                        return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.REPETIDO("sucursal"));
+
                 return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+
             }
         }
 
@@ -75,9 +84,16 @@ namespace SistemaInventario._Features.Lotes
 
                 return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal), Codigos.Success, Mensajes.OPERACION_EXITOSA("editado"));
             }
-            catch
+            catch (DbUpdateException ex)
             {
+                var innerException = ex.InnerException;
+
+                if (innerException is SqlException sqlException)
+                    if (sqlException.Number == 2601 || sqlException.Number == 2627)
+                        return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.REPETIDO("sucursal"));
+
                 return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+
             }
         }
 
