@@ -14,11 +14,13 @@ namespace SistemaInventario._Features.Lotes
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly CommonService _commonService;
 
-        public SucursalService(UnitOfWorkBuilder unitOfWork, IMapper mapper)
+        public SucursalService(UnitOfWorkBuilder unitOfWork, IMapper mapper, CommonService commonService)
         {
             _unitOfWork = unitOfWork.BuilderInventarioAjm();
             _mapper = mapper;
+            _commonService = commonService;
         }
 
         public Respuesta<List<SucursalDto>> ListarSucursales()
@@ -56,14 +58,7 @@ namespace SistemaInventario._Features.Lotes
             }
             catch (DbUpdateException ex)
             {
-                var innerException = ex.InnerException;
-
-                if( innerException is SqlException sqlException )
-                    if(sqlException.Number == 2601 || sqlException.Number == 2627)
-                        return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.REPETIDO("sucursal"));
-
-                return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
-
+                return _commonService.RespuestasCatch<SucursalDto>(ex, "sucursal");
             }
         }
 
@@ -86,16 +81,8 @@ namespace SistemaInventario._Features.Lotes
             }
             catch (DbUpdateException ex)
             {
-                var innerException = ex.InnerException;
 
-                if (innerException is SqlException sqlException)
-                    if (sqlException.Number == 2601 || sqlException.Number == 2627)
-                        return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.REPETIDO("sucursal"));
-                    else if (sqlException.Number == 547)
-                        return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.LLAVE_FORANEA);
-
-                return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
-
+                return _commonService.RespuestasCatch<SucursalDto>(ex, "sucursal");
             }
         }
 

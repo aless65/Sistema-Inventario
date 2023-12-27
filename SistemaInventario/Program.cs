@@ -1,6 +1,7 @@
 using AcademiaFS.Proyecto.Inventario.Domain;
 using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.EntityFrameworkCore;
+using SistemaInventario._Common;
 using SistemaInventario._Features.Empleados;
 using SistemaInventario._Features.Lotes;
 using SistemaInventario.Infrastructure;
@@ -45,6 +46,8 @@ builder.Services.AddTransient<SalidasInventarioService>();
 builder.Services.AddTransient<SucursalService>();
 builder.Services.AddTransient<UsuarioService>();
 builder.Services.AddTransient<DomainService>();
+
+builder.Services.AddTransient<CommonService>();
 
 var app = builder.Build();
 

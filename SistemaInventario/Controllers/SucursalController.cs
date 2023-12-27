@@ -47,6 +47,5 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
 
             return Ok(respuesta);
         }
-
     }
 }

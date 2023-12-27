@@ -29,11 +29,8 @@
     <Folder Include="kubernetes\" />
     <Folder Include="_Common\Dtos\" />
     <Folder Include="_Features\Empleados\Dtos\" />
-    <Folder Include="_Features\Lotes\Dtos\" />
     <Folder Include="_Features\PerfilesPorPermisos\Dtos\" />
-    <Folder Include="_Features\Productos\Dtos\" />
     <Folder Include="_Features\SalidasInventarios\Dtos\" />
-    <Folder Include="_Features\Usuarios\Dtos\" />
   </ItemGroup>
 
 </Project>
