@@ -28,7 +28,7 @@
   <ItemGroup>
     <Folder Include="kubernetes\" />
     <Folder Include="_Common\Dtos\" />
-    <Folder Include="_Features\Empleados\Dtos\" />
+    <Folder Include="_Features\Auth\Dto\" />
     <Folder Include="_Features\PerfilesPorPermisos\Dtos\" />
     <Folder Include="_Features\SalidasInventarios\Dtos\" />
   </ItemGroup>

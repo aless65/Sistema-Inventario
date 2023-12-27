@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using SistemaInventario._Common;
+using System;
 using System.Collections.Generic;
 
 namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
@@ -32,4 +34,12 @@ public partial class Empleado
     public virtual Usuario? IdUsuarioModificacionNavigation { get; set; }
 
     public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+}
+
+public class EmpleadoValidator : AbstractValidator<Empleado>
+{
+    public EmpleadoValidator()
+    {
+        RuleFor(r => r.Identidad).NotEmpty().MaximumLength(13).MinimumLength(13).WithMessage(Mensajes.LONGITUD_ERRONEA("Identidad", 13));
+    }
 }

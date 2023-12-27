@@ -6,8 +6,6 @@
 
         public string Nombre { get; set; } = null!;
 
-        public string Contrasena { get; set; } = null!;
-
         public int? IdEmpleado { get; set; }
 
         public string? NombreEmpleado { get; set; }

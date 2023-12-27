@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Empleados.Dtos;
+using AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Productos.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Usuarios.Dtos;
@@ -11,6 +12,7 @@ namespace SistemaInventario.Infrastructure
     {
         public MapProfile()
         {
+            CreateMap<Empleado, EmpleadoDto>().ReverseMap();
             CreateMap<Lote, LoteDto>().ReverseMap();
             CreateMap<Lote, LoteListarDto>().ReverseMap();
             CreateMap<Producto, ProductoDto>().ReverseMap();

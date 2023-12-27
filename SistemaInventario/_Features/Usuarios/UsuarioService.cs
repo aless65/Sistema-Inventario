@@ -69,7 +69,7 @@ namespace SistemaInventario._Features.Lotes
 
                 return Respuesta.Success(_mapper.Map<UsuarioDto>(usuario), Codigos.Success, Mensajes.PROCESO_EXITOSO);
             }
-            catch
+            catch 
             {
                 return Respuesta.Fault<UsuarioDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
             }
