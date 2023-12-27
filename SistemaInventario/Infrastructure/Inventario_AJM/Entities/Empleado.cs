@@ -41,5 +41,6 @@ public class EmpleadoValidator : AbstractValidator<Empleado>
     public EmpleadoValidator()
     {
         RuleFor(r => r.Identidad).NotEmpty().MaximumLength(13).MinimumLength(13).WithMessage(Mensajes.LONGITUD_ERRONEA("Identidad", 13));
+        RuleFor(r => r.Telefono).NotEmpty().MinimumLength(8).WithMessage(Mensajes.LONGITUD_ERRONEA("Teléfono", 8));
     }
 }

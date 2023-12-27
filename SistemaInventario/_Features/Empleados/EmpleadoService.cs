@@ -47,25 +47,25 @@ namespace SistemaInventario._Features.Empleados
             }
         }
 
-        //public Respuesta<SucursalDto> InsertarSucursales(SucursalDto sucursalDto)
-        //{
-        //    try
-        //    {
-        //        var sucursal = _mapper.Map<Sucursal>(sucursalDto);
+        public Respuesta<EmpleadoDto> InsertarEmpleados(EmpleadoDto empleadoDto)
+        {
+            try
+            {
+                var empleado = _mapper.Map<Empleado>(empleadoDto);
 
-        //        sucursal.FechaCreacion = DateTime.Now;
-        //        sucursal.IdUsuarioCreacion = 1;
+                empleado.FechaCreacion = DateTime.Now;
+                empleado.IdUsuarioCreacion = 1;
 
-        //        _unitOfWork.Repository<Sucursal>().Add(sucursal);
-        //        _unitOfWork.SaveChanges();
+                _unitOfWork.Repository<Empleado>().Add(empleado);
+                _unitOfWork.SaveChanges();
 
-        //        return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal), Codigos.Success, Mensajes.OPERACION_EXITOSA("insertado"));
-        //    }
-        //    catch (DbUpdateException ex)
-        //    {
-        //        return _commonService.RespuestasCatch<SucursalDto>(ex, "sucursal");
-        //    }
-        //}
+                return Respuesta.Success(_mapper.Map<EmpleadoDto>(empleado), Codigos.Success, Mensajes.OPERACION_EXITOSA("insertado"));
+            }
+            catch (DbUpdateException ex)
+            {
+                return _commonService.RespuestasCatch<EmpleadoDto>(ex, "empleado");
+            }
+        }
 
         //public Respuesta<SucursalDto> EditarSucursales(SucursalDto sucursalDto)
         //{
