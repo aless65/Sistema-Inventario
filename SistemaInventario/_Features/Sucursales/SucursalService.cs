@@ -4,6 +4,7 @@ using AcademiaFS.Proyecto.Inventario.Utility;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Lotes
 {
@@ -23,16 +24,17 @@ namespace SistemaInventario._Features.Lotes
             try
             {
                 var listado = (from sucu in _unitOfWork.Repository<Sucursal>().AsQueryable()
+                               where sucu.Activo == true
                                select new SucursalDto
                                {
                                    IdSucursal = sucu.IdSucursal,
                                    Nombre = sucu.Nombre
                                }).ToList();
 
-                return Respuesta.Success(listado);
+                return Respuesta.Success(listado, Codigos.Success, Mensajes.PROCESO_EXITOSO);
             } catch 
             {
-                return Respuesta.Fault<List<SucursalDto>>("", "");
+                return Respuesta.Fault<List<SucursalDto>>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
             }
         }
 
@@ -48,11 +50,11 @@ namespace SistemaInventario._Features.Lotes
                 _unitOfWork.Repository<Sucursal>().Add(sucursal);
                 _unitOfWork.SaveChanges();
 
-                return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal));
+                return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal), Codigos.Success, Mensajes.OPERACION_EXITOSA("insertado"));
             }
             catch
             {
-                return Respuesta.Fault<SucursalDto>("", "");
+                return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
             }
         }
 
@@ -71,11 +73,32 @@ namespace SistemaInventario._Features.Lotes
                     _unitOfWork.SaveChanges();
                 }
 
-                return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal));
+                return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal), Codigos.Success, Mensajes.OPERACION_EXITOSA("editado"));
             }
             catch
             {
-                return Respuesta.Fault<SucursalDto>("", "");
+                return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+            }
+        }
+
+        public Respuesta<string> EliminarSucursales(int id)
+        {
+            try
+            {
+                var sucursal = _unitOfWork.Repository<Sucursal>().Where(x => x.IdSucursal == id).FirstOrDefault();
+
+                if (sucursal != null)
+                {
+                    sucursal.Activo = false;
+
+                    _unitOfWork.SaveChanges();
+                }
+
+                return Respuesta.Success("", Codigos.Success, Mensajes.OPERACION_EXITOSA("eliminado"));
+            }
+            catch
+            {
+                return Respuesta.Fault<string>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
             }
         }
     }

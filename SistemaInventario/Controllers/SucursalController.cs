@@ -32,12 +32,21 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
             return Ok(respuesta);
         }
 
-        [HttpPost("Editar")]
+        [HttpPut("Editar")]
         public IActionResult Edit(SucursalDto sucursal)
         {
             var respuesta = _sucursalService.EditarSucursales(sucursal);
 
             return Ok(respuesta);
         }
+
+        [HttpPut("Eliminar/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var respuesta = _sucursalService.EliminarSucursales(id);
+
+            return Ok(respuesta);
+        }
+
     }
 }

@@ -21,7 +21,7 @@ public partial class SalidasInventario
 
     public int IdEstado { get; set; }
 
-    public bool Activo { get; set; }
+    public bool? Activo { get; set; }
 
     public int IdUsuarioCreacion { get; set; }
 

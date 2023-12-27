@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 
 namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 
@@ -9,7 +11,7 @@ public partial class Sucursal
 
     public required string Nombre { get; set; } = null!;
 
-    public bool Activo { get; set; }
+    public bool? Activo { get; set; }
 
     public int IdUsuarioCreacion { get; set; }
 

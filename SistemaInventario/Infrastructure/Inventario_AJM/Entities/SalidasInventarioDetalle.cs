@@ -13,7 +13,7 @@ public partial class SalidasInventarioDetalle
 
     public int CantidadProducto { get; set; }
 
-    public bool Activo { get; set; }
+    public bool? Activo { get; set; }
 
     public int IdUsuarioCreacion { get; set; }
 

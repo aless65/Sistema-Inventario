@@ -9,7 +9,7 @@ public partial class Producto
 
     public string? Nombre { get; set; } = null!;
 
-    public bool Activo { get; set; }
+    public bool? Activo { get; set; }
 
     public int IdUsuarioCreacion { get; set; }
 

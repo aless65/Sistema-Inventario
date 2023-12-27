@@ -17,7 +17,7 @@ public partial class Lote
 
     public int Inventario { get; set; }
 
-    public bool Activo { get; set; }
+    public bool? Activo { get; set; }
 
     public int IdUsuarioCreacion { get; set; }
 

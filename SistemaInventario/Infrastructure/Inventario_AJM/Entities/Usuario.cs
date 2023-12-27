@@ -17,7 +17,7 @@ public partial class Usuario
 
     public bool EsAdmin { get; set; }
 
-    public bool Activo { get; set; }
+    public bool? Activo { get; set; }
 
     public int IdUsuarioCreacion { get; set; }
 
