@@ -27,10 +27,12 @@ namespace SistemaInventario._Features.Lotes
             try
             {
                 var listado = (from usua in _unitOfWork.Repository<Usuario>().AsQueryable()
-                               join empe in _unitOfWork.Repository<Empleado>().AsQueryable()
-                               on usua.IdEmpleado equals empe.IdEmpleado
+                               join empl in _unitOfWork.Repository<Empleado>().AsQueryable()
+                               on usua.IdEmpleado equals empl.IdEmpleado into emplleft
+                               from subempl in emplleft.DefaultIfEmpty()
                                join perf in _unitOfWork.Repository<Perfil>().AsQueryable()
-                               on usua.IdPerfil equals perf.IdPerfil
+                               on usua.IdPerfil equals perf.IdPerfil into perfleft
+                               from subperf in perfleft.DefaultIfEmpty()
                                where usua.Activo == true
                                select new UsuarioListarDto
                                {
@@ -38,9 +40,9 @@ namespace SistemaInventario._Features.Lotes
                                    Nombre = usua.Nombre,
                                    EsAdmin = usua.EsAdmin,
                                    IdEmpleado = usua.IdEmpleado,
-                                   NombreEmpleado = empe.Nombres + empe.Apellidos,
+                                   NombreEmpleado = subempl.Nombres + subempl.Apellidos,
                                    IdPerfil = usua.IdPerfil,
-                                   NombrePerfil = perf.Nombre
+                                   NombrePerfil = subperf.Nombre
                                }).ToList();
 
                 return Respuesta.Success(listado, Codigos.Success, Mensajes.PROCESO_EXITOSO);
@@ -72,6 +74,46 @@ namespace SistemaInventario._Features.Lotes
             catch 
             {
                 return Respuesta.Fault<UsuarioDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+            }
+        }
+
+        public Respuesta<string> DesactivarUsuario(int id)
+        {
+            try
+            {
+                var usuarioADesactivar = _unitOfWork.Repository<Usuario>().Where(x => x.IdUsuario == id).FirstOrDefault();
+
+                if(usuarioADesactivar != null)
+                {
+                    usuarioADesactivar.Activo = false;
+                    _unitOfWork.SaveChanges();
+                }
+
+                return Respuesta.Success("", Codigos.Success, Mensajes.OPERACION_EXITOSA("desactivado"));
+            }
+            catch
+            {
+                return Respuesta.Fault<string>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+            }
+        }
+
+        public Respuesta<string> ActivarUsuario(int id)
+        {
+            try
+            {
+                var usuarioADesactivar = _unitOfWork.Repository<Usuario>().Where(x => x.IdUsuario == id).FirstOrDefault();
+
+                if (usuarioADesactivar != null)
+                {
+                    usuarioADesactivar.Activo = true;
+                    _unitOfWork.SaveChanges();
+                }
+
+                return Respuesta.Success("", Codigos.Success, Mensajes.OPERACION_EXITOSA("activado"));
+            }
+            catch
+            {
+                return Respuesta.Fault<string>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
             }
         }
     }

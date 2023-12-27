@@ -30,5 +30,21 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
 
             return Ok(respuesta);
         }
+
+        [HttpPost("Desactivar/{id}")]
+        public IActionResult Desactivar(int id)
+        {
+            var respuesta = _usuarioService.DesactivarUsuario(id);
+
+            return Ok(respuesta);
+        }
+
+        [HttpPost("Activar/{id}")]
+        public IActionResult Activar(int id)
+        {
+            var respuesta = _usuarioService.ActivarUsuario(id);
+
+            return Ok(respuesta);
+        }
     }
 }
