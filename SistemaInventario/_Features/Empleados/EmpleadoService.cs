@@ -5,6 +5,7 @@ using AcademiaFS.Proyecto.Inventario.Utility;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using SistemaInventario._Common;
 
@@ -53,6 +54,16 @@ namespace SistemaInventario._Features.Empleados
             {
                 var empleado = _mapper.Map<Empleado>(empleadoDto);
 
+                EmpleadoValidator validator = new EmpleadoValidator();
+                ValidationResult validationResult = validator.Validate(empleado);
+
+                if (!validationResult.IsValid)
+                {
+                    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
+                    string menssageValidation = string.Join(Environment.NewLine, errores);
+                    return Respuesta.Fault<EmpleadoDto>(menssageValidation, Codigos.BadRequest);
+                }
+
                 empleado.FechaCreacion = DateTime.Now;
                 empleado.IdUsuarioCreacion = 1;
 
@@ -67,29 +78,32 @@ namespace SistemaInventario._Features.Empleados
             }
         }
 
-        //public Respuesta<SucursalDto> EditarSucursales(SucursalDto sucursalDto)
-        //{
-        //    try
-        //    {
-        //        var sucursal = _unitOfWork.Repository<Sucursal>().Where(x => x.IdSucursal == sucursalDto.IdSucursal).FirstOrDefault();
+        public Respuesta<EmpleadoDto> EditarEmpleados(EmpleadoDto empleadoDto)
+        {
+            try
+            {
+                var empleado = _unitOfWork.Repository<Empleado>().Where(x => x.IdEmpleado == empleadoDto.IdEmpleado).FirstOrDefault();
 
-        //        if (sucursal != null)
-        //        {
-        //            sucursal.Nombre = sucursalDto.Nombre;
-        //            sucursal.FechaModificacion = DateTime.Now;
-        //            sucursal.IdUsuarioModificacion = 1;
+                if (empleado != null)
+                {
+                    empleado.Nombres = empleadoDto.Nombres;
+                    empleado.Apellidos = empleadoDto.Apellidos;
+                    empleado.Identidad = empleadoDto.Identidad;
+                    empleado.Direccion = empleadoDto.Direccion;
+                    empleado.FechaModificacion = DateTime.Now;
+                    empleado.IdUsuarioModificacion = 1;
 
-        //            _unitOfWork.SaveChanges();
-        //        }
+                    _unitOfWork.SaveChanges();
+                }
 
-        //        return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal), Codigos.Success, Mensajes.OPERACION_EXITOSA("editado"));
-        //    }
-        //    catch (DbUpdateException ex)
-        //    {
+                return Respuesta.Success(_mapper.Map<EmpleadoDto>(empleado), Codigos.Success, Mensajes.OPERACION_EXITOSA("editado"));
+            }
+            catch (DbUpdateException ex)
+            {
 
-        //        return _commonService.RespuestasCatch<SucursalDto>(ex, "sucursal");
-        //    }
-        //}
+                return _commonService.RespuestasCatch<EmpleadoDto>(ex, "sucursal");
+            }
+        }
 
         //public Respuesta<string> EliminarSucursales(int id)
         //{
