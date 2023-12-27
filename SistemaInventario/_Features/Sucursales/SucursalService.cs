@@ -91,6 +91,8 @@ namespace SistemaInventario._Features.Lotes
                 if (innerException is SqlException sqlException)
                     if (sqlException.Number == 2601 || sqlException.Number == 2627)
                         return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.REPETIDO("sucursal"));
+                    else if (sqlException.Number == 547)
+                        return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.LLAVE_FORANEA);
 
                 return Respuesta.Fault<SucursalDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
 

@@ -4,6 +4,7 @@
     {
         public const string PROCESO_EXITOSO = "Operación exitosa";
         public const string PROCESO_FALLIDO = "Error. Intente más tarde";
+        public const string LLAVE_FORANEA = "Hay un conflicto con las llaves foráneas. Verifique los datos e intente de nuevo";
         public const string SEXO_INVALIDO = "El sexo debe ser F o M";
 
         public static string OPERACION_EXITOSA(string nombreOperacion)
