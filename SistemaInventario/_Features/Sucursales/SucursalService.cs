@@ -55,5 +55,28 @@ namespace SistemaInventario._Features.Lotes
                 return Respuesta.Fault<SucursalDto>("", "");
             }
         }
+
+        public Respuesta<SucursalDto> EditarSucursales(SucursalDto sucursalDto)
+        {
+            try
+            {
+                var sucursal = _unitOfWork.Repository<Sucursal>().Where(x => x.IdSucursal == sucursalDto.IdSucursal).FirstOrDefault();
+
+                if(sucursal != null)
+                {
+                    sucursal.Nombre = sucursalDto.Nombre;
+                    sucursal.FechaModificacion = DateTime.Now;
+                    sucursal.IdUsuarioModificacion = 1;
+
+                    _unitOfWork.SaveChanges();
+                }
+
+                return Respuesta.Success(_mapper.Map<SucursalDto>(sucursal));
+            }
+            catch
+            {
+                return Respuesta.Fault<SucursalDto>("", "");
+            }
+        }
     }
 }

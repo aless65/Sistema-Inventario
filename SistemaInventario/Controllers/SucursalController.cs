@@ -31,5 +31,13 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
 
             return Ok(respuesta);
         }
+
+        [HttpPost("Editar")]
+        public IActionResult Edit(SucursalDto sucursal)
+        {
+            var respuesta = _sucursalService.EditarSucursales(sucursal);
+
+            return Ok(respuesta);
+        }
     }
 }
