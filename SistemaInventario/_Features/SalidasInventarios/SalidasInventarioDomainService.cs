@@ -20,7 +20,18 @@ namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios
             List<SalidasInventarioDetalle> detalles = new();
 
             if (productosDisponbles.Sum(x => x.Inventario) < salidasInventarioInsertarDto.Cantidad)
-                return Respuesta.Fault("Stock insuficiente", "400", detalles);
+                return Respuesta.Fault("Stock insuficiente", "", detalles);
+            else
+            {
+                int cantidadCubierta = 0;
+                foreach (var item in productosDisponbles)
+                {
+                    detalles.Add(new SalidasInventarioDetalle
+                    {
+                        IdLote = item.IdLote
+                    });
+                }
+            }
 
             return Respuesta.Success(detalles);
 
