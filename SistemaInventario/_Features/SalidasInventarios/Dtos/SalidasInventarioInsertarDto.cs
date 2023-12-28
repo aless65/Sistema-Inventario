@@ -1,6 +1,6 @@
 ﻿namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos
 {
-    public class SalidasInventarioInsertar
+    public class SalidasInventarioInsertarDto
     {
         public int IdSucursal { get; set; }
         public int IdProducto { get; set; }

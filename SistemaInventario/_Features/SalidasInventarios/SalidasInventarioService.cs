@@ -16,12 +16,14 @@ namespace SistemaInventario._Features.Lotes
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly CommonService _commonService;
+        private readonly SalidasInventarioDomainService _salidasInventarioDomainService;
 
-        public SalidasInventarioService(UnitOfWorkBuilder unitOfWork, IMapper mapper, CommonService commonService)
+        public SalidasInventarioService(UnitOfWorkBuilder unitOfWork, IMapper mapper, CommonService commonService, SalidasInventarioDomainService salidasInventarioDomainService)
         {
             _unitOfWork = unitOfWork.BuilderInventarioAjm();
             _mapper = mapper;
             _commonService = commonService;
+            _salidasInventarioDomainService = salidasInventarioDomainService;
         }
 
         public Respuesta<List<SalidasInventarioListarDto>> ListarSalidas()
@@ -57,7 +59,7 @@ namespace SistemaInventario._Features.Lotes
         {
             try
             {
-
+                var respuesta = _salidasInventarioDomainService.ConseguirDetalles(salidasInventarioInsertarDto, _unitOfWork.Repository<Lote>().AsQueryable().ToList());
                 var salida = _mapper.Map<SalidasInventario>(salidasInventarioInsertarDto);
 
                 salida.Total = salida.SalidasInventarioDetalles.Select(x => x.CantidadProducto).Sum();

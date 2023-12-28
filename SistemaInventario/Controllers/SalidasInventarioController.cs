@@ -27,9 +27,9 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
         }
 
         [HttpPost("Insertar")]
-        public IActionResult Create(SalidasInventarioDto salidasInventarioDto)
+        public IActionResult Create(SalidasInventarioInsertarDto salidasInventarioInsertarDto)
         {
-            var respuesta = _salidasInventarioService.InsertarSalidas(salidasInventarioDto);
+            var respuesta = _salidasInventarioService.InsertarSalidas(salidasInventarioInsertarDto);
 
             return Ok(respuesta);
         }
