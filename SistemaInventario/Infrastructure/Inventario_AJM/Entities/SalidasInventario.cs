@@ -42,4 +42,6 @@ public partial class SalidasInventario
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 
     public virtual Usuario IdUsuarioRecibeNavigation { get; set; } = null!;
+
+    public virtual ICollection<SalidasInventarioDetalle> SalidasInventarioDetalles { get; set; } = new List<SalidasInventarioDetalle>();
 }

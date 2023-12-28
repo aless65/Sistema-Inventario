@@ -31,7 +31,7 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
             return Ok(respuesta);
         }
 
-        [HttpPost("Desactivar/{id}")]
+        [HttpPut("Desactivar/{id}")]
         public IActionResult Desactivar(int id)
         {
             var respuesta = _usuarioService.DesactivarUsuario(id);
@@ -39,7 +39,7 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
             return Ok(respuesta);
         }
 
-        [HttpPost("Activar/{id}")]
+        [HttpPut("Activar/{id}")]
         public IActionResult Activar(int id)
         {
             var respuesta = _usuarioService.ActivarUsuario(id);

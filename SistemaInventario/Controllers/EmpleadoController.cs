@@ -32,5 +32,21 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
             return Ok(respuesta);
         }
 
+        [HttpPut("Editar")]
+        public IActionResult Edit(EmpleadoDto empleadoDto)
+        {
+            var respuesta = _empleadoService.EditarEmpleados(empleadoDto);
+
+            return Ok(respuesta);
+        }
+
+        [HttpPut("Eliminar/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var respuesta = _empleadoService.EliminarEmpleados(id);
+
+            return Ok(respuesta);
+        }
+
     }
 }

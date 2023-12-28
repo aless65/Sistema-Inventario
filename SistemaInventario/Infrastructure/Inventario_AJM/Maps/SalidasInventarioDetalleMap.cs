@@ -19,6 +19,10 @@ namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Maps
                 .HasForeignKey(d => d.IdLote)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
+            builder.HasOne(d => d.IdSalidaInventarioNavigation).WithMany(p => p.SalidasInventarioDetalles)
+                .HasForeignKey(d => d.IdSalidaInventario)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
             builder.HasOne(d => d.IdUsuarioCreacionNavigation).WithMany(p => p.SalidasInventarioDetalleIdUsuarioCreacionNavigations)
                 .HasForeignKey(d => d.IdUsuarioCreacion)
                 .OnDelete(DeleteBehavior.ClientSetNull)

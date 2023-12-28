@@ -86,6 +86,16 @@ namespace SistemaInventario._Features.Empleados
 
                 if (empleado != null)
                 {
+                    EmpleadoValidator validator = new EmpleadoValidator();
+                    ValidationResult validationResult = validator.Validate(empleado);
+
+                    if (!validationResult.IsValid)
+                    {
+                        IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
+                        string menssageValidation = string.Join(Environment.NewLine, errores);
+                        return Respuesta.Fault<EmpleadoDto>(menssageValidation, Codigos.BadRequest);
+                    }
+
                     empleado.Nombres = empleadoDto.Nombres;
                     empleado.Apellidos = empleadoDto.Apellidos;
                     empleado.Identidad = empleadoDto.Identidad;
@@ -101,30 +111,30 @@ namespace SistemaInventario._Features.Empleados
             catch (DbUpdateException ex)
             {
 
-                return _commonService.RespuestasCatch<EmpleadoDto>(ex, "sucursal");
+                return _commonService.RespuestasCatch<EmpleadoDto>(ex, "empleado");
             }
         }
 
-        //public Respuesta<string> EliminarSucursales(int id)
-        //{
-        //    try
-        //    {
-        //        var sucursal = _unitOfWork.Repository<Sucursal>().Where(x => x.IdSucursal == id).FirstOrDefault();
+        public Respuesta<string> EliminarEmpleados(int id)
+        {
+            try
+            {
+                var sucursal = _unitOfWork.Repository<Empleado>().Where(x => x.IdEmpleado == id).FirstOrDefault();
 
-        //        if (sucursal != null)
-        //        {
-        //            sucursal.Activo = false;
+                if (sucursal != null)
+                {
+                    sucursal.Activo = false;
 
-        //            _unitOfWork.SaveChanges();
-        //        }
+                    _unitOfWork.SaveChanges();
+                }
 
-        //        return Respuesta.Success("", Codigos.Success, Mensajes.OPERACION_EXITOSA("eliminado"));
-        //    }
-        //    catch
-        //    {
-        //        return Respuesta.Fault<string>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
-        //    }
-        //}
+                return Respuesta.Success("", Codigos.Success, Mensajes.OPERACION_EXITOSA("eliminado"));
+            }
+            catch
+            {
+                return Respuesta.Fault<string>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+            }
+        }
 
     }
 }
