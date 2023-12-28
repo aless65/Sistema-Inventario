@@ -20,6 +20,9 @@ namespace SistemaInventario.Infrastructure
             CreateMap<Lote, LoteListarDto>().ReverseMap();
             CreateMap<Producto, ProductoDto>().ReverseMap();
             CreateMap<SalidasInventario, SalidasInventarioDto>().ReverseMap();
+            CreateMap<SalidasInventario, SalidasInventarioListarDto>().ReverseMap();
+            CreateMap<SalidasInventarioDetalle, SalidasInventarioDetalleDto>().ReverseMap();
+            CreateMap<SalidasInventarioDetalle, SalidasInventarioDetalleListarDto>().ReverseMap();
             CreateMap<Sucursal, SucursalDto>().ReverseMap();
             CreateMap<Usuario, UsuarioDto>().ReverseMap();
             CreateMap<Usuario, UsuarioListarDto>().ReverseMap();

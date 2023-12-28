@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Features.Empleados;
+using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SistemaInventario._Features.Empleados;
@@ -21,6 +22,14 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
         public IActionResult Index()
         {
             var respuesta = _salidasInventarioService.ListarSalidas();
+
+            return Ok(respuesta);
+        }
+
+        [HttpPost("Insertar")]
+        public IActionResult Create(SalidasInventarioDto salidasInventarioDto)
+        {
+            var respuesta = _salidasInventarioService.InsertarSalidas(salidasInventarioDto);
 
             return Ok(respuesta);
         }

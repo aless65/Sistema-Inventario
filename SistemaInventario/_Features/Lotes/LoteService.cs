@@ -39,6 +39,7 @@ namespace SistemaInventario._Features.Lotes
                                    NombreProducto = prod.Nombre,
                                    CantidadInicial = lote.CantidadInicial,
                                    CostoUnidad = lote.CostoUnidad,
+                                   //FechaVencimiento = DateOnly.Parse(lote.FechaVencimiento.ToString()),
                                    FechaVencimiento = lote.FechaVencimiento,
                                    Inventario = lote.Inventario
                                }).ToList();

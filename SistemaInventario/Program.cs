@@ -3,6 +3,7 @@ using AcademiaFS.Proyecto.Inventario._Features.Estados;
 using AcademiaFS.Proyecto.Inventario.Domain;
 using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using SistemaInventario._Common;
 using SistemaInventario._Features.Empleados;
 using SistemaInventario._Features.Lotes;
@@ -25,7 +26,14 @@ builder.Services.AddCors(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+    c.MapType<DateOnly>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "date"
+    })
+);
 
 //builder.Services.AddSwaggerForFsIdentityServer(opt =>
 //{

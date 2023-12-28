@@ -1,4 +1,6 @@
-﻿namespace AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos
 {
     public class LoteDto
     {

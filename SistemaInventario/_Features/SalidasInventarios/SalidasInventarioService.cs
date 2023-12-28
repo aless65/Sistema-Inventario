@@ -11,7 +11,7 @@ using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Lotes
 {
-    public class SalidasInventarioService : ISalidasInventarioService<SalidasInventarioDto, SalidasInventarioListarDto>
+    public class SalidasInventarioService : ISalidasInventarioService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -41,29 +41,44 @@ namespace SistemaInventario._Features.Lotes
                                    IdUsuario = sali.IdUsuario,
                                    FechaRecibido = sali.FechaRecibido,
                                    IdUsuarioRecibe = sali.IdUsuarioRecibe,
-                                   SalidasInventarioDetalles = (ICollection<SalidasInventarioDetalleDto>)sali.SalidasInventarioDetalles
+                                   SalidasInventarioDetalles = _mapper.Map<List<SalidasInventarioDetalleDto>>(sali.SalidasInventarioDetalles)
                                }).ToList();
 
                 return Respuesta.Success(listado, Codigos.Success, Mensajes.PROCESO_EXITOSO);
 
             }               
-            catch
+            catch  
             {
                 return Respuesta.Fault<List<SalidasInventarioListarDto>>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
             }
         }
 
-        public Respuesta<SalidasInventarioDto> InsertarSalidas(SalidasInventarioDto salidasInventarioDto)
+        public Respuesta<SalidasInventarioListarDto> InsertarSalidas(SalidasInventarioInsertarDto salidasInventarioInsertarDto)
         {
             try
             {
 
+                var salida = _mapper.Map<SalidasInventario>(salidasInventarioDto);
+
+                salida.Total = salida.SalidasInventarioDetalles.Select(x => x.CantidadProducto).Sum();
+                salida.IdUsuarioCreacion = 1;
+                salida.FechaCreacion = DateTime.Now;
+
+                foreach (var item in salida.SalidasInventarioDetalles)
+                {
+                    item.FechaCreacion = DateTime.Now;
+                    item.IdUsuarioCreacion = 1;
+                }
+
+                _unitOfWork.Repository<SalidasInventario>().Add(salida);
+                _unitOfWork.SaveChanges();
+
+                return Respuesta.Success(_mapper.Map<SalidasInventarioListarDto>(salida), Codigos.Success, Mensajes.OPERACION_EXITOSA("insertado"));
             }
             catch (DbUpdateException ex)
             {
-                return _commonService.RespuestasCatch<SalidasInventarioDto>(ex, "salida");
+                return _commonService.RespuestasCatch<SalidasInventarioListarDto>(ex, "salida");
             }
-            //throw new NotImplementedException();
         }
     }
 }

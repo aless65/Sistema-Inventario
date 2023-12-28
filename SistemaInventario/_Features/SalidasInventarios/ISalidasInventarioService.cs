@@ -1,10 +1,11 @@
-﻿using Farsiman.Application.Core.Standard.DTOs;
+﻿using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos;
+using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios
 {
-    public interface ISalidasInventarioService<T, U>
+    public interface ISalidasInventarioService
     {
-        Respuesta<List<U>> ListarSalidas();
-        Respuesta<T> InsertarSalidas(T salidasInventarioDto);
+        Respuesta<List<SalidasInventarioListarDto>> ListarSalidas();
+        Respuesta<SalidasInventarioListarDto> InsertarSalidas(SalidasInventarioInsertarDto salidasInventarioInsertarDto );
     }
 }
