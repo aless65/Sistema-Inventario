@@ -1,4 +1,6 @@
-﻿namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos
+﻿using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
+
+namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos
 {
     public class SalidasInventarioDto
     {
@@ -17,5 +19,6 @@
         public int IdUsuarioRecibe { get; set; }    
 
         public int IdEstado { get; set; }
+        public virtual ICollection<SalidasInventarioDetalleDto> SalidasInventarioDetalles { get; set; } = new List<SalidasInventarioDetalleDto>();
     }
 }

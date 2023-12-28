@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Empleados.Dtos;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Empleados;
+using AcademiaFS.Proyecto.Inventario._Features.Empleados.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Utility;
@@ -11,7 +12,7 @@ using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Empleados
 {
-    public class EmpleadoService
+    public class EmpleadoService : IEmpleadoService<EmpleadoDto>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;

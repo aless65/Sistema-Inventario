@@ -15,9 +15,9 @@ public partial class SalidasInventario
 
     public decimal Total { get; set; }
 
-    public DateOnly FechaRecibido { get; set; }
+    public DateTime? FechaRecibido { get; set; }
 
-    public int IdUsuarioRecibe { get; set; }
+    public int? IdUsuarioRecibe { get; set; }
 
     public int IdEstado { get; set; }
 

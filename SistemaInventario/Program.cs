@@ -1,4 +1,5 @@
 using AcademiaFS.Proyecto.Inventario._Features.Auth;
+using AcademiaFS.Proyecto.Inventario._Features.Estados;
 using AcademiaFS.Proyecto.Inventario.Domain;
 using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.EntityFrameworkCore;
@@ -40,8 +41,9 @@ builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
-builder.Services.AddTransient<EmpleadoService>();
 builder.Services.AddTransient<AuthService>();
+builder.Services.AddTransient<EmpleadoService>();
+builder.Services.AddTransient<EstadoService>();
 builder.Services.AddTransient<LoteService>();
 builder.Services.AddTransient<ProductoService>();
 builder.Services.AddTransient<SalidasInventarioService>();

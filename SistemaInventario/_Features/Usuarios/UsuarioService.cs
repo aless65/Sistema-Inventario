@@ -1,15 +1,17 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
+using AcademiaFS.Proyecto.Inventario._Features.Usuarios;
 using AcademiaFS.Proyecto.Inventario._Features.Usuarios.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Utility;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using Microsoft.EntityFrameworkCore;
 using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Lotes
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService<UsuarioDto, UsuarioListarDto>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -71,9 +73,9 @@ namespace SistemaInventario._Features.Lotes
 
                 return Respuesta.Success(_mapper.Map<UsuarioDto>(usuario), Codigos.Success, Mensajes.PROCESO_EXITOSO);
             }
-            catch 
+            catch (DbUpdateException ex)
             {
-                return Respuesta.Fault<UsuarioDto>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+                return _commonService.RespuestasCatch<UsuarioDto>(ex, "usuario");
             }
         }
 
