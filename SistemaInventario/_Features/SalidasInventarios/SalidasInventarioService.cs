@@ -58,7 +58,7 @@ namespace SistemaInventario._Features.Lotes
             try
             {
 
-                var salida = _mapper.Map<SalidasInventario>(salidasInventarioDto);
+                var salida = _mapper.Map<SalidasInventario>(salidasInventarioInsertarDto);
 
                 salida.Total = salida.SalidasInventarioDetalles.Select(x => x.CantidadProducto).Sum();
                 salida.IdUsuarioCreacion = 1;
