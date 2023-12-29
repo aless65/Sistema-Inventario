@@ -15,19 +15,19 @@ public partial class SalidasInventarioDetalle
 
     public bool? Activo { get; set; }
 
-    public int IdUsuarioCreacion { get; set; }
+    //public int IdUsuarioCreacion { get; set; }
 
-    public DateTime FechaCreacion { get; set; }
+    //public DateTime FechaCreacion { get; set; }
 
-    public int? IdUsuarioModificacion { get; set; }
+    //public int? IdUsuarioModificacion { get; set; }
 
-    public DateTime? FechaModificacion { get; set; }
+    //public DateTime? FechaModificacion { get; set; }
 
     public virtual Lote IdLoteNavigation { get; set; } = null!;
 
     public virtual SalidasInventario IdSalidaInventarioNavigation { get; set; } = null!;
 
-    public virtual Usuario IdUsuarioCreacionNavigation { get; set; } = null!;
+    //public virtual Usuario IdUsuarioCreacionNavigation { get; set; } = null!;
 
-    public virtual Usuario? IdUsuarioModificacionNavigation { get; set; }
+    //public virtual Usuario? IdUsuarioModificacionNavigation { get; set; }
 }

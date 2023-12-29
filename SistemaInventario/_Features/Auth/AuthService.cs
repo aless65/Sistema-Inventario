@@ -10,17 +10,13 @@ using SistemaInventario._Common;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.Auth
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
-        private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly CommonService _commonService;
 
-        public AuthService(UnitOfWorkBuilder unitOfWork, IMapper mapper, CommonService commonService)
+        public AuthService(UnitOfWorkBuilder unitOfWork)
         {
             _unitOfWork = unitOfWork.BuilderInventarioAjm();
-            _mapper = mapper;
-            _commonService = commonService;
         }
 
         public Respuesta<UsuarioListarDto> Login(string nombre, string contrasena)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaInventario.Infrastructure.Inventario_AJM;
 
@@ -11,9 +12,11 @@ using SistemaInventario.Infrastructure.Inventario_AJM;
 namespace AcademiaFS.Proyecto.Inventario.Migrations
 {
     [DbContext(typeof(InventarioAjmContext))]
-    partial class InventarioAjmContextModelSnapshot : ModelSnapshot
+    [Migration("20231229212741_AuditoriaSalidasInventarioDetalles2")]
+    partial class AuditoriaSalidasInventarioDetalles2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

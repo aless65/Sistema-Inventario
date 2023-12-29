@@ -12,7 +12,7 @@ using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Empleados
 {
-    public class EmpleadoService : IEmpleadoService<EmpleadoDto>
+    public class EmpleadoService : IEmpleadoService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;

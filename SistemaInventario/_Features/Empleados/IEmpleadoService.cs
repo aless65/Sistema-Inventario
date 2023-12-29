@@ -3,11 +3,11 @@ using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.Empleados
 {
-    public interface IEmpleadoService<T>
+    public interface IEmpleadoService
     {
-        Respuesta<List<T>> ListarEmpleados();
-        Respuesta<T> InsertarEmpleados(T empleadoDto);
-        Respuesta<T> EditarEmpleados(T empleadoDto);
+        Respuesta<List<EmpleadoDto>> ListarEmpleados();
+        Respuesta<EmpleadoDto> InsertarEmpleados(EmpleadoDto empleadoDto);
+        Respuesta<EmpleadoDto> EditarEmpleados(EmpleadoDto empleadoDto);
         Respuesta<string> EliminarEmpleados(int id);
     }
 }

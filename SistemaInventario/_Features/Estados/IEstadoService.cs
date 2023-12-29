@@ -1,12 +1,13 @@
-﻿using Farsiman.Application.Core.Standard.DTOs;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Estados.Dtos;
+using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.Estados
 {
-    public interface IEstadoService<T>
+    public interface IEstadoService
     {
-        Respuesta<List<T>> ListarEstados();
-        Respuesta<T> InsertarEstados(T empleadoDto);
-        Respuesta<T> EditarEstados(T empleadoDto);
+        Respuesta<List<EstadoDto>> ListarEstados();
+        Respuesta<EstadoDto> InsertarEstados(EstadoDto empleadoDto);
+        Respuesta<EstadoDto> EditarEstados(EstadoDto empleadoDto);
         Respuesta<string> EliminarEstados(int id);
     }
 }

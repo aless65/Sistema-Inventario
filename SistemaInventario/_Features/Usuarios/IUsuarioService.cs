@@ -3,10 +3,10 @@ using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.Usuarios
 {
-    public interface IUsuarioService<T, U>
+    public interface IUsuarioService
     {
-        Respuesta<List<U>> ListarUsuarios();
-        Respuesta<T> InsertarUsuarios(T usuarioDto);
+        Respuesta<List<UsuarioListarDto>> ListarUsuarios();
+        Respuesta<UsuarioDto> InsertarUsuarios(UsuarioDto usuarioDto);
         Respuesta<string> DesactivarUsuario(int id);
         Respuesta<string> ActivarUsuario(int id);
     }

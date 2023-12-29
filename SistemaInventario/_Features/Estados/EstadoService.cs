@@ -10,7 +10,7 @@ using SistemaInventario._Common;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.Estados
 {
-    public class EstadoService : IEstadoService<EstadoDto>
+    public class EstadoService : IEstadoService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;

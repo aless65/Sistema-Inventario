@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaInventario.Infrastructure.Inventario_AJM;
 
@@ -11,9 +12,11 @@ using SistemaInventario.Infrastructure.Inventario_AJM;
 namespace AcademiaFS.Proyecto.Inventario.Migrations
 {
     [DbContext(typeof(InventarioAjmContext))]
-    partial class InventarioAjmContextModelSnapshot : ModelSnapshot
+    [Migration("20231229211117_AuditoriaSalidasInventarioDetalles")]
+    partial class AuditoriaSalidasInventarioDetalles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,12 +410,22 @@ namespace AcademiaFS.Proyecto.Inventario.Migrations
                     b.Property<int>("IdSalidaInventario")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdUsuarioCreacionNavigationIdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdUsuarioModificacionNavigationIdUsuario")
+                        .HasColumnType("int");
+
                     b.HasKey("IdSalidaDetalle")
                         .HasName("PK_SalidasInventarioDetalles_IdSalidaDetalle");
 
                     b.HasIndex("IdLote");
 
                     b.HasIndex("IdSalidaInventario");
+
+                    b.HasIndex("IdUsuarioCreacionNavigationIdUsuario");
+
+                    b.HasIndex("IdUsuarioModificacionNavigationIdUsuario");
 
                     b.ToTable("SalidasInventarioDetalles");
                 });
@@ -688,9 +701,23 @@ namespace AcademiaFS.Proyecto.Inventario.Migrations
                         .HasForeignKey("IdSalidaInventario")
                         .IsRequired();
 
+                    b.HasOne("AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities.Usuario", "IdUsuarioCreacionNavigation")
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioCreacionNavigationIdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities.Usuario", "IdUsuarioModificacionNavigation")
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioModificacionNavigationIdUsuario");
+
                     b.Navigation("IdLoteNavigation");
 
                     b.Navigation("IdSalidaInventarioNavigation");
+
+                    b.Navigation("IdUsuarioCreacionNavigation");
+
+                    b.Navigation("IdUsuarioModificacionNavigation");
                 });
 
             modelBuilder.Entity("AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities.Sucursal", b =>

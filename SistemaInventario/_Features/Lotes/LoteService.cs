@@ -11,7 +11,7 @@ using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Lotes
 {
-    public class LoteService : ILoteService<LoteDto, LoteListarDto>
+    public class LoteService : ILoteService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;

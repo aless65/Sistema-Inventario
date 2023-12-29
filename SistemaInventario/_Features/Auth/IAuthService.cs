@@ -3,8 +3,8 @@ using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.Auth
 {
-    public interface IAuthService<T>
+    public interface IAuthService
     {
-        Respuesta<T> Login(string nombre, string contrasena);
+        Respuesta<UsuarioListarDto> Login(string nombre, string contrasena);
     }
 }

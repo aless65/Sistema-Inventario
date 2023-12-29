@@ -63,9 +63,9 @@ public partial class Usuario
 
     public virtual ICollection<Producto> ProductoIdUsuarioModificacionNavigations { get; set; } = new List<Producto>();
 
-    public virtual ICollection<SalidasInventarioDetalle> SalidasInventarioDetalleIdUsuarioCreacionNavigations { get; set; } = new List<SalidasInventarioDetalle>();
+    //public virtual ICollection<SalidasInventarioDetalle> SalidasInventarioDetalleIdUsuarioCreacionNavigations { get; set; } = new List<SalidasInventarioDetalle>();
 
-    public virtual ICollection<SalidasInventarioDetalle> SalidasInventarioDetalleIdUsuarioModificacionNavigations { get; set; } = new List<SalidasInventarioDetalle>();
+    //public virtual ICollection<SalidasInventarioDetalle> SalidasInventarioDetalleIdUsuarioModificacionNavigations { get; set; } = new List<SalidasInventarioDetalle>();
 
     public virtual ICollection<SalidasInventario> SalidasInventarioIdUsuarioCreacionNavigations { get; set; } = new List<SalidasInventario>();
 

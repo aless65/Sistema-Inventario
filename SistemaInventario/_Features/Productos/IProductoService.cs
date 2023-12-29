@@ -3,11 +3,11 @@ using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.Inventario._Features.Productos
 {
-    public interface IProductoService<T>
+    public interface IProductoService
     {
-        Respuesta<List<T>> ListarProductos();
-        Respuesta<T> InsertarProductos(T productoDto);
-        Respuesta<T> EditarProductos(T productoDto);
+        Respuesta<List<ProductoDto>> ListarProductos();
+        Respuesta<ProductoDto> InsertarProductos(ProductoDto productoDto);
+        Respuesta<ProductoDto> EditarProductos(ProductoDto productoDto);
         Respuesta<string> EliminarProductos(int id);
     }
 }

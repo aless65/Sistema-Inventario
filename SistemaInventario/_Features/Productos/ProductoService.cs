@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Productos.Dtos;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Productos;
+using AcademiaFS.Proyecto.Inventario._Features.Productos.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Utility;
@@ -10,7 +11,7 @@ using SistemaInventario._Common;
 
 namespace SistemaInventario._Features.Lotes
 {
-    public class ProductoService
+    public class ProductoService : IProductoService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
