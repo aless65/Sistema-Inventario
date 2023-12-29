@@ -54,7 +54,7 @@ namespace SistemaInventario._Features.Lotes
             }               
             catch  
             {
-                return Respuesta.Fault<List<SalidasInventarioListarDto>>(Codigos.Error, Mensajes.PROCESO_FALLIDO);
+                return Respuesta.Fault<List<SalidasInventarioListarDto>>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
 
@@ -135,6 +135,59 @@ namespace SistemaInventario._Features.Lotes
             {
                 return _commonService.RespuestasCatch<SalidasInventarioListarDto>(ex, "salida");
             }
+        }
+
+        public Respuesta<List<SalidasInventarioFiltradasDto>> ListarSalidasFiltro(DateTime fechaInicio, DateTime fechaFin, int IdSucursal)
+        {
+            var listado = (from sali in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
+                           join esta in _unitOfWork.Repository<Estado>().AsQueryable()
+                           on sali.IdEstado equals esta.IdEstado
+                           join usua in _unitOfWork.Repository<Usuario>().AsQueryable()
+                           on sali.IdUsuarioRecibe equals usua.IdUsuario into usualeft
+                           from subusua in usualeft.DefaultIfEmpty()
+                           where sali.Fecha.Date >= fechaInicio.Date && sali.Fecha.Date <= fechaFin.Date && sali.IdSucursal == IdSucursal
+                           select new SalidasInventarioFiltradasDto
+                           {
+                               IdSalidaInventario = sali.IdSalidaInventario,
+                               Fecha = sali.Fecha,
+                               CantidadUnidades = sali.SalidasInventarioDetalles.Sum(x => x.CantidadProducto),
+                               Total = sali.Total,
+                               IdEstado = sali.IdEstado,
+                               NombreEstado = esta.Nombre,
+                               IdUsuarioRecibe = sali.IdUsuarioRecibe,
+                               NombreUsuarioRecibe = subusua.Nombre,
+                               FechaRecibido = sali.FechaRecibido
+                           }).ToList();
+
+            return Respuesta.Success(listado, Mensajes.PROCESO_EXITOSO, Codigos.Success);
+        }
+
+        public Respuesta<SalidasInventarioListarDto> RecibirSalida(SalidasInventariosRecibirDto salidasInventariosRecibirDto)
+        {
+            try
+            {
+                var salidaARecibir = _unitOfWork.Repository<SalidasInventario>().AsQueryable().Where(x => x.IdSalidaInventario == salidasInventariosRecibirDto.IdSalida).FirstOrDefault();
+
+                
+
+                if (salidaARecibir != null)
+                {
+                    if (salidaARecibir.IdUsuarioRecibe != null || salidaARecibir.FechaRecibido != null)
+                        return Respuesta.Fault<SalidasInventarioListarDto>("Esta salida ya ha sido recibida", Codigos.Info);
+
+                    salidaARecibir.IdUsuarioRecibe = salidasInventariosRecibirDto.IdUsuarioRecibe;
+                    salidaARecibir.FechaRecibido = salidasInventariosRecibirDto.FechaRecibido;
+                }
+
+                _unitOfWork.SaveChanges();
+
+                return Respuesta.Success(_mapper.Map<SalidasInventarioListarDto>(salidaARecibir), Codigos.Success, Mensajes.OPERACION_EXITOSA("recibido"));
+
+            } catch (DbUpdateException ex)
+            {
+                return _commonService.RespuestasCatch<SalidasInventarioListarDto>(ex, "salida");
+            }
+
         }
     }
 }

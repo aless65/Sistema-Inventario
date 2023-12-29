@@ -33,5 +33,21 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
 
             return Ok(respuesta);
         }
+
+        [HttpGet("ListarFiltroFechaYSucursal/{fechaInicio}/{fechaFin}/{IdSucursal}")]
+        public IActionResult ListadoFechaYSucursal(DateTime fechaInicio, DateTime fechaFin, int IdSucursal)
+        {
+            var respuesta = _salidasInventarioService.ListarSalidasFiltro(fechaInicio, fechaFin, IdSucursal);
+
+            return Ok(respuesta);
+        }
+
+        [HttpPut("RecibirSalidasInventario")]
+        public IActionResult RecibirSalida(SalidasInventariosRecibirDto salidasInventariosRecibirDto)
+        {
+            var respuesta = _salidasInventarioService.RecibirSalida(salidasInventariosRecibirDto);
+
+            return Ok(respuesta);
+        }
     }
 }
