@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Usuarios.Dtos;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Usuarios.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Utility;
 using AutoMapper;
@@ -45,8 +46,14 @@ namespace AcademiaFS.Proyecto.Inventario._Features.Auth
                                  EsAdmin = usua.EsAdmin,
                              }).FirstOrDefault();
 
-            if (respuesta != null) 
-                return Respuesta.Success(respuesta, Mensajes.LOGIN_EXITOSO, Codigos.Success); 
+            if (respuesta != null)
+            {
+                DatosSesion.IdUsuario = respuesta.IdUsuario;
+                DatosSesion.IdPerfil = respuesta.IdPerfil;
+                DatosSesion.EsAdmin = respuesta.EsAdmin;
+
+                return Respuesta.Success(respuesta, Mensajes.LOGIN_EXITOSO, Codigos.Success);
+            }
             else
                 return Respuesta.Fault< UsuarioListarDto>(Mensajes.LOGIN_FALLIDO, Codigos.NotFound);
         }

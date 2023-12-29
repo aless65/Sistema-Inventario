@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Common;
+using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
 using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios;
 using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
@@ -61,13 +62,17 @@ namespace SistemaInventario._Features.Lotes
         {
             try
             {
+
+                if (DatosSesion.IdPerfil != (int)EstadosDeSalidas.JefeDeTiendaId && !DatosSesion.EsAdmin)
+                    return Respuesta.Fault<SalidasInventarioListarDto>(Mensajes.NO_AUTORIZADO, Codigos.Unauthorized);
+
                 var sobrepasaLimite = (from sali in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
                                        where sali.IdSucursal == salidasInventarioInsertarDto.IdSucursal && sali.IdEstado == (int)EstadosDeSalidas.EnviadaASucursal
                                        select sali.Total).ToList();
 
                 var validarSucursal = _salidasInventarioDomainService.ValidarSucursales(salidasInventarioInsertarDto.IdSucursal, sobrepasaLimite);
 
-                if(!validarSucursal.Ok)
+                if (!validarSucursal.Ok)
                     return Respuesta.Fault<SalidasInventarioListarDto>(validarSucursal.Mensaje);
 
                 List<Lote> productosDisponbles = (from lote in _unitOfWork.Repository<Lote>().AsQueryable()

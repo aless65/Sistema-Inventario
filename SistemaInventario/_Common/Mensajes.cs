@@ -8,6 +8,7 @@
         public const string SEXO_INVALIDO = "El sexo debe ser F o M";
         public const string LOGIN_EXITOSO = "Sesión iniciada";
         public const string LOGIN_FALLIDO = "El nombre de usuario o la contraseña son incorrectos";
+        public const string NO_AUTORIZADO = "No tiene los permisos para ejecutar esta acción";
 
         public static string OPERACION_EXITOSA(string nombreOperacion)
         {
