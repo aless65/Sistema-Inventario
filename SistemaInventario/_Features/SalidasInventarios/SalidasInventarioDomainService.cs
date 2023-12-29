@@ -39,8 +39,6 @@ namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios
                         {
                             IdLote = item.IdLote,
                             CantidadProducto = salidasInventarioInsertarDto.Cantidad,
-                            //IdUsuarioCreacion = 1,
-                            //FechaCreacion = DateTime.Now
                         });
 
                         item.Inventario -= salidasInventarioInsertarDto.Cantidad;
@@ -53,8 +51,6 @@ namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios
                         {
                             IdLote = item.IdLote,
                             CantidadProducto = item.Inventario,
-                            //IdUsuarioCreacion = 1,
-                            //FechaCreacion = DateTime.Now
                         });
 
                         salidasInventarioInsertarDto.Cantidad -= item.Inventario;
