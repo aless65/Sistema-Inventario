@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios;
+﻿using AcademiaFS.Proyecto.Inventario._Common;
+using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios;
 using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
@@ -40,6 +41,7 @@ namespace SistemaInventario._Features.Lotes
                                    IdSucursal = sucu.IdSucursal,
                                    NombreSucursal = sucu.Nombre,
                                    Fecha = sali.Fecha,
+                                   Total = sali.Total,
                                    IdUsuario = sali.IdUsuario,
                                    FechaRecibido = sali.FechaRecibido,
                                    IdUsuarioRecibe = sali.IdUsuarioRecibe,
@@ -59,23 +61,70 @@ namespace SistemaInventario._Features.Lotes
         {
             try
             {
-                var respuesta = _salidasInventarioDomainService.ConseguirDetalles(salidasInventarioInsertarDto, _unitOfWork.Repository<Lote>().AsQueryable().ToList());
-                var salida = _mapper.Map<SalidasInventario>(salidasInventarioInsertarDto);
+                var sobrepasaLimite = (from sali in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
+                                       where sali.IdSucursal == salidasInventarioInsertarDto.IdSucursal && sali.IdEstado == (int)EstadosDeSalidas.EnviadaASucursal
+                                       select sali.Total).ToList();
 
-                salida.Total = salida.SalidasInventarioDetalles.Select(x => x.CantidadProducto).Sum();
-                salida.IdUsuarioCreacion = 1;
-                salida.FechaCreacion = DateTime.Now;
+                var validarSucursal = _salidasInventarioDomainService.ValidarSucursales(salidasInventarioInsertarDto.IdSucursal, sobrepasaLimite);
 
-                foreach (var item in salida.SalidasInventarioDetalles)
+                if(!validarSucursal.Ok)
+                    return Respuesta.Fault<SalidasInventarioListarDto>(validarSucursal.Mensaje);
+
+                List<Lote> productosDisponbles = (from lote in _unitOfWork.Repository<Lote>().AsQueryable()
+                                                  orderby lote.FechaVencimiento ascending
+                                                  where lote.IdProducto == salidasInventarioInsertarDto.IdProducto
+                                                  && lote.Inventario > 0
+                                                  select new Lote
+                                                  {
+                                                      IdLote = lote.IdLote,
+                                                      CostoUnidad = lote.CostoUnidad,
+                                                      Inventario = lote.Inventario
+                                                  }).ToList();
+
+                var respuesta = _salidasInventarioDomainService.ConseguirDetalles(salidasInventarioInsertarDto, productosDisponbles);
+
+                if (respuesta.Ok)
                 {
-                    item.FechaCreacion = DateTime.Now;
-                    item.IdUsuarioCreacion = 1;
+                    SalidasInventario salida = new SalidasInventario
+                    {
+                        IdSucursal = salidasInventarioInsertarDto.IdSucursal,
+                        Fecha = salidasInventarioInsertarDto.Fecha,
+                        IdUsuario = salidasInventarioInsertarDto.IdUsuario,
+                        IdEstado = (int)EstadosDeSalidas.EnviadaASucursal,
+                        Total = (from detalles in respuesta.Data.AsQueryable()
+                                 join lote in productosDisponbles.AsQueryable()
+                                 on detalles.IdLote equals lote.IdLote
+                                 select detalles.CantidadProducto * lote.CostoUnidad).Sum(),
+                        IdUsuarioCreacion = 1,
+                        FechaCreacion = DateTime.Now,
+                        SalidasInventarioDetalles = respuesta.Data
+                    };
+
+                    _unitOfWork.BeginTransaction();
+
+
+                    foreach (var item in productosDisponbles)
+                    {
+                        var inventarioAEditar = _unitOfWork.Repository<Lote>().Where(x => x.IdLote == item.IdLote).FirstOrDefault();
+
+                        if (inventarioAEditar != null)
+                            inventarioAEditar.Inventario = item.Inventario;
+                    }
+
+                    _unitOfWork.Repository<SalidasInventario>().Add(salida);
+
+
+                    _unitOfWork.Commit();
+                    _unitOfWork.SaveChanges();
+
+                    return Respuesta.Success(_mapper.Map<SalidasInventarioListarDto>(salida), Codigos.Success, Mensajes.OPERACION_EXITOSA("insertado"));
+
+                }
+                else
+                {
+                    return Respuesta.Fault<SalidasInventarioListarDto>(respuesta.Mensaje);
                 }
 
-                _unitOfWork.Repository<SalidasInventario>().Add(salida);
-                _unitOfWork.SaveChanges();
-
-                return Respuesta.Success(_mapper.Map<SalidasInventarioListarDto>(salida), Codigos.Success, Mensajes.OPERACION_EXITOSA("insertado"));
             }
             catch (DbUpdateException ex)
             {
