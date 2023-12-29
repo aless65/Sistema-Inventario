@@ -15,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+//builder.Services.AddControllers(options =>
+//{
+//    options.Filters.Add(new CustomAuthorizationAttribute());
+//});
+
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>

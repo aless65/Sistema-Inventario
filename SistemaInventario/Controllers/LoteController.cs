@@ -1,5 +1,6 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
+using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SistemaInventario._Features.Lotes;
@@ -8,6 +9,7 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [CustomAuthorization]
     public class LoteController : ControllerBase
     {
         private readonly LoteService _loteService;

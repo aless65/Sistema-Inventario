@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Features.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly AuthService _loginService;
