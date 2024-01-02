@@ -62,15 +62,11 @@ namespace SistemaInventario._Features.Lotes
         {
             try
             {
-
-                if (DatosSesion.IdPerfil != (int)EstadosDeSalidas.JefeDeTiendaId && !DatosSesion.EsAdmin)
-                    return Respuesta.Fault<SalidasInventarioListarDto>(Mensajes.NO_AUTORIZADO, Codigos.Unauthorized);
-
                 var sobrepasaLimite = (from sali in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
                                        where sali.IdSucursal == salidasInventarioInsertarDto.IdSucursal && sali.IdEstado == (int)EstadosDeSalidas.EnviadaASucursal
                                        select sali.Total).ToList();
 
-                var validarSucursal = _salidasInventarioDomainService.ValidarSucursales(salidasInventarioInsertarDto.IdSucursal, sobrepasaLimite);
+                var validarSucursal = _salidasInventarioDomainService.ValidarPermisoYDisponibilidad(salidasInventarioInsertarDto.IdSucursal, sobrepasaLimite);
 
                 if (!validarSucursal.Ok)
                     return Respuesta.Fault<SalidasInventarioListarDto>(validarSucursal.Mensaje);
@@ -100,7 +96,7 @@ namespace SistemaInventario._Features.Lotes
                                  join lote in productosDisponbles.AsQueryable()
                                  on detalles.IdLote equals lote.IdLote
                                  select detalles.CantidadProducto * lote.CostoUnidad).Sum(),
-                        IdUsuarioCreacion = 1,
+                        IdUsuarioCreacion = DatosSesion.IdUsuario,
                         FechaCreacion = DateTime.Now,
                         SalidasInventarioDetalles = respuesta.Data
                     };

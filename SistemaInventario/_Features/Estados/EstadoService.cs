@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Estados.Dtos;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Estados.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Utility;
@@ -50,7 +51,7 @@ namespace AcademiaFS.Proyecto.Inventario._Features.Estados
                 var empleado = _mapper.Map<Estado>(empleadoDto);
 
                 empleado.FechaCreacion = DateTime.Now;
-                empleado.IdUsuarioCreacion = 1;
+                empleado.IdUsuarioCreacion = DatosSesion.IdUsuario;
 
                 _unitOfWork.Repository<Estado>().Add(empleado);
                 _unitOfWork.SaveChanges();
@@ -73,7 +74,7 @@ namespace AcademiaFS.Proyecto.Inventario._Features.Estados
                 {
                     empleado.Nombre = empleado.Nombre;
                     empleado.FechaModificacion = DateTime.Now;
-                    empleado.IdUsuarioModificacion = 1;
+                    empleado.IdUsuarioModificacion = DatosSesion.IdUsuario;
 
                     _unitOfWork.SaveChanges();
                 }

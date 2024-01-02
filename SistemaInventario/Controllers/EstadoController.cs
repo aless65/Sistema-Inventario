@@ -1,12 +1,14 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Features.Estados;
 using AcademiaFS.Proyecto.Inventario._Features.Estados.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos;
+using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademiaFS.Proyecto.Inventario.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [CustomAuthorization]
     public class EstadoController : ControllerBase
     {
         private readonly EstadoService _estadoService;

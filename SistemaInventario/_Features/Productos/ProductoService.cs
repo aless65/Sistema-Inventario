@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Productos;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Productos;
 using AcademiaFS.Proyecto.Inventario._Features.Productos.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
@@ -51,7 +52,7 @@ namespace SistemaInventario._Features.Lotes
                 var producto = _mapper.Map<Producto>(productoDto);
 
                 producto.FechaCreacion = DateTime.Now;
-                producto.IdUsuarioCreacion = 1;
+                producto.IdUsuarioCreacion = DatosSesion.IdUsuario;
 
                 _unitOfWork.Repository<Producto>().Add(producto);
                 _unitOfWork.SaveChanges();
@@ -75,7 +76,7 @@ namespace SistemaInventario._Features.Lotes
                 {
                     producto.Nombre = productoDto.Nombre;
                     producto.FechaModificacion = DateTime.Now;
-                    producto.IdUsuarioModificacion = 1;
+                    producto.IdUsuarioModificacion = DatosSesion.IdUsuario;
 
                     _unitOfWork.SaveChanges();
                 }

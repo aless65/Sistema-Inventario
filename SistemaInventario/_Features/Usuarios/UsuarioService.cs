@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Usuarios;
 using AcademiaFS.Proyecto.Inventario._Features.Usuarios.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
@@ -65,7 +66,7 @@ namespace SistemaInventario._Features.Lotes
                 var contrasenaHash = EncriptarClave.HashedString(contrasena);
 
                 usuario.FechaCreacion = DateTime.Now;
-                usuario.IdUsuarioCreacion = 1;
+                usuario.IdUsuarioCreacion = DatosSesion.IdUsuario;
                 usuario.Contrasena = contrasenaHash;
 
                 _unitOfWork.Repository<Usuario>().Add(usuario);

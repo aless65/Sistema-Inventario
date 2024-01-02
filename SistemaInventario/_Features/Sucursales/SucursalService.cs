@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Sucursales;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Sucursales;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Utility;
@@ -50,7 +51,7 @@ namespace SistemaInventario._Features.Lotes
                 var sucursal = _mapper.Map<Sucursal>(sucursalDto);
 
                 sucursal.FechaCreacion = DateTime.Now;
-                sucursal.IdUsuarioCreacion = 1;
+                sucursal.IdUsuarioCreacion = DatosSesion.IdUsuario;
 
                 _unitOfWork.Repository<Sucursal>().Add(sucursal);
                 _unitOfWork.SaveChanges();
@@ -73,7 +74,7 @@ namespace SistemaInventario._Features.Lotes
                 {
                     sucursal.Nombre = sucursalDto.Nombre;
                     sucursal.FechaModificacion = DateTime.Now;
-                    sucursal.IdUsuarioModificacion = 1;
+                    sucursal.IdUsuarioModificacion = DatosSesion.IdUsuario;
 
                     _unitOfWork.SaveChanges();
                 }

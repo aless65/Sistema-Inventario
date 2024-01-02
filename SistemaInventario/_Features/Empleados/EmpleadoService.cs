@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Empleados;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Empleados;
 using AcademiaFS.Proyecto.Inventario._Features.Empleados.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
@@ -66,7 +67,7 @@ namespace SistemaInventario._Features.Empleados
                 }
 
                 empleado.FechaCreacion = DateTime.Now;
-                empleado.IdUsuarioCreacion = 1;
+                empleado.IdUsuarioCreacion = DatosSesion.IdUsuario;
 
                 _unitOfWork.Repository<Empleado>().Add(empleado);
                 _unitOfWork.SaveChanges();
@@ -102,7 +103,7 @@ namespace SistemaInventario._Features.Empleados
                     empleado.Identidad = empleadoDto.Identidad;
                     empleado.Direccion = empleadoDto.Direccion;
                     empleado.FechaModificacion = DateTime.Now;
-                    empleado.IdUsuarioModificacion = 1;
+                    empleado.IdUsuarioModificacion = DatosSesion.IdUsuario;
 
                     _unitOfWork.SaveChanges();
                 }

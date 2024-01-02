@@ -1,4 +1,6 @@
-﻿namespace SistemaInventario._Common
+﻿using AcademiaFS.Proyecto.Inventario._Common;
+
+namespace SistemaInventario._Common
 {
     public static class Mensajes
     {
@@ -9,6 +11,7 @@
         public const string LOGIN_EXITOSO = "Sesión iniciada";
         public const string LOGIN_FALLIDO = "El nombre de usuario o la contraseña son incorrectos";
         public const string NO_AUTORIZADO = "No tiene los permisos para ejecutar esta acción";
+        public const string STOCK_INSUFICIENTE = "No tiene los permisos para ejecutar esta acción";
 
         public static string OPERACION_EXITOSA(string nombreOperacion)
         {
@@ -33,6 +36,11 @@
         public static string NO_EXISTE(string nombrePropiedad)
         {
             return $"El/la '{nombrePropiedad}' no existe";
+        }
+
+        public static string LIMITE_SUCURSAL(int cantidad)
+        {
+            return $"Esta sucursal cuenta con más de L. {cantidad} en salidas enviadas";
         }
     }
 }

@@ -34,6 +34,7 @@ namespace AcademiaFS.Proyecto.Inventario._Features.Auth
                              where usua.Nombre == nombre && usua.Contrasena == contrasenaHash && usua.Activo == true
                              select new UsuarioListarDto
                              {
+                                 IdUsuario = usua.IdUsuario,
                                  Nombre = usua.Nombre,
                                  IdPerfil = usua.IdPerfil,
                                  NombrePerfil = subperf.Nombre ?? string.Empty,

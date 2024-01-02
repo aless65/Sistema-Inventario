@@ -1,5 +1,6 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Features.Empleados;
 using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos;
+using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SistemaInventario._Features.Empleados;
@@ -9,6 +10,7 @@ namespace AcademiaFS.Proyecto.Inventario.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [CustomAuthorization]
     public class SalidasInventarioController : ControllerBase
     {
         private readonly SalidasInventarioService _salidasInventarioService;

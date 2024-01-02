@@ -9,7 +9,7 @@ namespace AcademiaFS.Proyecto.Inventario.Utility
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if(!DatosSesion.HasLoginInfo())
+            if (DatosSesion.IdUsuario <= 0)
             {
                 context.Result = new UnauthorizedResult();
             }
