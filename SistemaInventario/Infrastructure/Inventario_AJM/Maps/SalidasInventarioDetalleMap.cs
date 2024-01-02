@@ -11,8 +11,6 @@ namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Maps
         {
             builder.HasKey(e => e.IdSalidaDetalle).HasName("PK_SalidasInventarioDetalles_IdSalidaDetalle");
 
-            builder.Property(e => e.Activo).HasDefaultValue(true);
-
             builder.HasOne(d => d.IdLoteNavigation).WithMany(p => p.SalidasInventarioDetalles)
                 .HasForeignKey(d => d.IdLote)
             .OnDelete(DeleteBehavior.ClientSetNull);

@@ -13,8 +13,6 @@ public partial class SalidasInventarioDetalle
 
     public int CantidadProducto { get; set; }
 
-    public bool? Activo { get; set; }
-
     public virtual Lote IdLoteNavigation { get; set; } = null!;
 
     public virtual SalidasInventario IdSalidaInventarioNavigation { get; set; } = null!;
