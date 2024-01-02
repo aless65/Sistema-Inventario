@@ -18,5 +18,11 @@ namespace AcademiaFS.Proyecto.Inventario.Utility
             DbContext dbContext = _serviceProvider.GetService<InventarioAjmContext>() ?? throw new NullReferenceException();
             return new UnitOfWork(dbContext);
         }
+
+        public IUnitOfWork BuilderInventarioAjmLogs()
+        {
+            DbContext dbContext = _serviceProvider.GetService<InventarioAjmContext>() ?? throw new NullReferenceException();
+            return new UnitOfWork(dbContext);
+        }
     }
 }

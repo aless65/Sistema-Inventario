@@ -3,8 +3,10 @@ using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Utility;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using Farsiman.Infraestructure.Core.Entity.Standard;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using SistemaInventario.Infrastructure.Inventario_AJM;
 
 namespace SistemaInventario._Common
 {
@@ -14,7 +16,7 @@ namespace SistemaInventario._Common
 
         public CommonService(UnitOfWorkBuilder unitOfWork)
         {
-            _unitOfWork = unitOfWork.BuilderInventarioAjm();
+            _unitOfWork = unitOfWork.BuilderInventarioAjmLogs();
         }
 
         public Respuesta<T> RespuestasCatch<T>(DbUpdateException ex, string objeto)
@@ -24,15 +26,19 @@ namespace SistemaInventario._Common
             if (innerException is SqlException sqlException)
             {
 
-                _unitOfWork.Repository<ErroresDb>()
-                .Add(new ErroresDb
-                { 
-                    FechaYHora = DateTime.Now,
-                    Codigo = sqlException.Number.ToString(),
-                    Mensaje = sqlException.Message,
-                });
+                using (var errorContext = _unitOfWork)
+                {
 
-                //_unitOfWork.SaveChanges();
+                    errorContext.Repository<ErroresDb>()
+                    .Add(new ErroresDb
+                    {
+                        FechaYHora = DateTime.Now,
+                        Codigo = sqlException.Number.ToString(),
+                        Mensaje = sqlException.Message,
+                    });
+
+                    errorContext.SaveChanges();
+                }
 
                 if (sqlException.Number == 2601 || sqlException.Number == 2627)
                     return Respuesta.Fault<T>(Codigos.Error, Mensajes.REPETIDO(objeto));
