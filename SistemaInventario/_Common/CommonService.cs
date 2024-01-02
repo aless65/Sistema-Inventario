@@ -26,10 +26,7 @@ namespace SistemaInventario._Common
             if (innerException is SqlException sqlException)
             {
 
-                using (var errorContext = _unitOfWork)
-                {
-
-                    errorContext.Repository<ErroresDb>()
+                _unitOfWork.Repository<ErroresDb>()
                     .Add(new ErroresDb
                     {
                         FechaYHora = DateTime.Now,
@@ -37,8 +34,18 @@ namespace SistemaInventario._Common
                         Mensaje = sqlException.Message,
                     });
 
-                    errorContext.SaveChanges();
-                }
+                _unitOfWork.ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Modified &&
+                            !typeof(ErroresDb).IsAssignableFrom(x.Entity.GetType()))
+                .ToList()
+                .ForEach(entry =>
+                {
+                    entry.CurrentValues.SetValues(entry.OriginalValues);
+                });
+
+                //_unitOfWork.
+
+                _unitOfWork.SaveChanges();
 
                 if (sqlException.Number == 2601 || sqlException.Number == 2627)
                     return Respuesta.Fault<T>(Codigos.Error, Mensajes.REPETIDO(objeto));
