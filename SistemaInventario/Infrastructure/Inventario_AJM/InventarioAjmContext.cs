@@ -17,6 +17,8 @@ namespace SistemaInventario.Infrastructure.Inventario_AJM
 
         public virtual DbSet<Empleado> Empleados { get; set; }
 
+        public virtual DbSet<ErroresDb> __ErroresDb { get; set; }
+
         public virtual DbSet<Estado> Estados { get; set; }
 
         public virtual DbSet<Lote> Lotes { get; set; }
@@ -40,6 +42,7 @@ namespace SistemaInventario.Infrastructure.Inventario_AJM
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmpleadoMap());
+            modelBuilder.ApplyConfiguration(new ErroresDbMap());
             modelBuilder.ApplyConfiguration(new EstadoMap());
             modelBuilder.ApplyConfiguration(new LoteMap());
             modelBuilder.ApplyConfiguration(new PerfilMap());
