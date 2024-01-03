@@ -129,6 +129,7 @@ namespace SistemaInventario._Features.Lotes
             }
             catch (DbUpdateException ex)
             {
+                _unitOfWork.RollBack();
                 return _commonService.RespuestasCatch<SalidasInventarioListarDto>(ex, "salida");
             }
         }

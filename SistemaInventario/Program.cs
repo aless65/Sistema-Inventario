@@ -62,12 +62,13 @@ builder.Services.AddTransient<EmpleadoService>();
 builder.Services.AddTransient<EstadoService>();
 builder.Services.AddTransient<LoteService>();
 builder.Services.AddTransient<ProductoService>();
+
 builder.Services.AddTransient<SalidasInventarioService>();
 builder.Services.AddTransient<SalidasInventarioDomainService>();
+
 builder.Services.AddTransient<SucursalService>();
 builder.Services.AddTransient<UsuarioService>();
 builder.Services.AddTransient<DomainService>();
-
 builder.Services.AddTransient<CommonService>();
 
 var app = builder.Build();
