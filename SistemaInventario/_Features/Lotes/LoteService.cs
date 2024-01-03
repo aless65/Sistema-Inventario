@@ -40,7 +40,6 @@ namespace SistemaInventario._Features.Lotes
                                    NombreProducto = prod.Nombre,
                                    CantidadInicial = lote.CantidadInicial,
                                    CostoUnidad = lote.CostoUnidad,
-                                   //FechaVencimiento = DateOnly.Parse(lote.FechaVencimiento.ToString()),
                                    FechaVencimiento = lote.FechaVencimiento,
                                    Inventario = lote.Inventario
                                }).ToList();
@@ -59,6 +58,7 @@ namespace SistemaInventario._Features.Lotes
             {
                 var lote = _mapper.Map<Lote>(loteDto);
 
+                lote.Inventario = lote.CantidadInicial;
                 lote.FechaCreacion = DateTime.Now;
                 lote.IdUsuarioCreacion = DatosSesion.IdUsuario;
 
