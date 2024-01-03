@@ -1,6 +1,10 @@
 ﻿using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Maps;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
 
 namespace SistemaInventario.Infrastructure.Inventario_AJM
 {

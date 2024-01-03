@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using SistemaInventario._Common;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,6 @@
 using AcademiaFS.Proyecto.Inventario._Features.Auth;
 using AcademiaFS.Proyecto.Inventario._Features.Estados;
 using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios;
-using AcademiaFS.Proyecto.Inventario.Domain;
 using AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM;
 using AcademiaFS.Proyecto.Inventario.Utility;
 using Microsoft.EntityFrameworkCore;
