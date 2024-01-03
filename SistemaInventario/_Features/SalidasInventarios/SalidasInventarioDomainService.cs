@@ -13,7 +13,7 @@ namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios
     public class SalidasInventarioDomainService
     {
 
-        public Respuesta<bool> ValidarPermisoYDisponibilidad(SalidasInventarioInsertarDto salidasInventarioInsertarDto, List<decimal> salidasInventario)
+        public Respuesta<bool> Validar(SalidasInventarioInsertarDto salidasInventarioInsertarDto, List<decimal> salidasInventario)
         {
             if (DatosSesion.IdPerfil != (int)EstadosDeSalidas.JefeDeTiendaId && !DatosSesion.EsAdmin)
                 return Respuesta.Fault<bool>(Mensajes.NO_AUTORIZADO, Codigos.Unauthorized);
