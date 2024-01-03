@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Common;
+using System.Drawing.Drawing2D;
 
 namespace SistemaInventario._Common
 {
@@ -26,6 +27,16 @@ namespace SistemaInventario._Common
         public static string LONGITUD_ERRONEA(string nombrePropiedad, int numeroCaracteres)
         {
             return $"El campo '{nombrePropiedad}' no cumple con el número de caracteres permitidos ({numeroCaracteres})";
+        }
+
+        public static string CAMPO_MAYOR(string nombrePropiedad, int cantidad)
+        {
+            return $"El campo '{nombrePropiedad}' debe ser mayor que {cantidad}";
+        }
+
+        public static string CAMPO_MENOR(string nombrePropiedad, int cantidad)
+        {
+            return $"El campo '{nombrePropiedad}' debe ser menor que {cantidad}";
         }
 
         public static string REPETIDO(string nombrePropiedad)

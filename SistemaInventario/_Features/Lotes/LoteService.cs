@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Empleados.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Lotes;
 using AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
@@ -7,6 +8,7 @@ using AcademiaFS.Proyecto.Inventario.Utility;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using SistemaInventario._Common;
 
@@ -57,6 +59,16 @@ namespace SistemaInventario._Features.Lotes
             try
             {
                 var lote = _mapper.Map<Lote>(loteDto);
+
+                LoteValidator validator = new LoteValidator();
+                ValidationResult validationResult = validator.Validate(lote);
+
+                if (!validationResult.IsValid)
+                {
+                    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
+                    string messageValidation = string.Join(Environment.NewLine, errores);
+                    return Respuesta.Fault<LoteDto>(messageValidation, Codigos.BadRequest);
+                }
 
                 lote.Inventario = lote.CantidadInicial;
                 lote.FechaCreacion = DateTime.Now;

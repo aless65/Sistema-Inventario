@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using SistemaInventario._Common;
+using System;
 using System.Collections.Generic;
 
 namespace AcademiaFS.Proyecto.Inventario.Infrastructure.Inventario_AJM.Entities;
@@ -35,3 +37,13 @@ public partial class Lote
 
     public virtual ICollection<SalidasInventarioDetalle> SalidasInventarioDetalles { get; set; } = new List<SalidasInventarioDetalle>();
 }
+
+public class LoteValidator : AbstractValidator<Lote>
+{
+    public LoteValidator()
+    {
+        RuleFor(r => r.CantidadInicial).GreaterThan(0).WithMessage(Mensajes.CAMPO_MAYOR("Cantidad inicial", 0));
+        RuleFor(r => r.CostoUnidad).GreaterThan(0).WithMessage(Mensajes.CAMPO_MAYOR("Costo por unidad", 0));
+    }
+}
+

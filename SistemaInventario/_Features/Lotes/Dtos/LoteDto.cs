@@ -14,6 +14,5 @@ namespace AcademiaFS.Proyecto.Inventario._Features.Lotes.Dtos
 
         public DateOnly FechaVencimiento { get; set; }
 
-        public int Inventario { get; set; }
     }
 }

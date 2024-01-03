@@ -66,7 +66,7 @@ namespace SistemaInventario._Features.Lotes
                                        where sali.IdSucursal == salidasInventarioInsertarDto.IdSucursal && sali.IdEstado == (int)EstadosDeSalidas.EnviadaASucursal
                                        select sali.Total).ToList();
 
-                var validarSucursal = _salidasInventarioDomainService.ValidarPermisoYDisponibilidad(salidasInventarioInsertarDto.IdSucursal, sobrepasaLimite);
+                var validarSucursal = _salidasInventarioDomainService.ValidarPermisoYDisponibilidad(salidasInventarioInsertarDto, sobrepasaLimite);
 
                 if (!validarSucursal.Ok)
                     return Respuesta.Fault<SalidasInventarioListarDto>(validarSucursal.Mensaje);

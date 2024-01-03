@@ -13,15 +13,18 @@ namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios
     public class SalidasInventarioDomainService
     {
 
-        public Respuesta<bool> ValidarPermisoYDisponibilidad(int IdSucursal, List<decimal> salidasInventario)
+        public Respuesta<bool> ValidarPermisoYDisponibilidad(SalidasInventarioInsertarDto salidasInventarioInsertarDto, List<decimal> salidasInventario)
         {
             if (DatosSesion.IdPerfil != (int)EstadosDeSalidas.JefeDeTiendaId && !DatosSesion.EsAdmin)
                 return Respuesta.Fault<bool>(Mensajes.NO_AUTORIZADO, Codigos.Unauthorized);
 
+            if (salidasInventarioInsertarDto.Cantidad < 1)
+                return Respuesta.Fault(Mensajes.CAMPO_MAYOR("Cantidad", 0), "", false);
+
             if (salidasInventario.Sum() > (int)EstadosDeSalidas.Limite)
                 return Respuesta.Fault(Mensajes.LIMITE_SUCURSAL((int)EstadosDeSalidas.Limite), "", false);
-            else
-                return Respuesta.Success(true);
+                
+            return Respuesta.Success(true);
         }
 
         public Respuesta<List<SalidasInventarioDetalle>> ConseguirDetalles(SalidasInventarioInsertarDto salidasInventarioInsertarDto, List<Lote> productosDisponbles)
