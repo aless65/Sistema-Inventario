@@ -9,6 +9,7 @@
         public string NombreSucursal { get; set; } = null!;
 
         public int IdUsuario { get; set; }
+        public string NombreUsuario { get; set; } = null!;
 
         public DateTime Fecha { get; set; }
 
@@ -17,8 +18,12 @@
         public DateTime? FechaRecibido { get; set; }
 
         public int? IdUsuarioRecibe { get; set; }
+        public string? NombreUsuarioRecibe { get; set; }
 
         public int IdEstado { get; set; }
+
+        public bool? Activo { get; set; }
+
         public virtual ICollection<SalidasInventarioDetalleDto>? SalidasInventarioDetalles { get; set; } = new List<SalidasInventarioDetalleDto>();
     }
 }

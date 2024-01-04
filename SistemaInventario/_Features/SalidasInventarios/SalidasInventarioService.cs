@@ -35,7 +35,11 @@ namespace SistemaInventario._Features.Lotes
                 var listado = (from sali in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
                                join sucu in _unitOfWork.Repository<Sucursal>().AsQueryable()
                                on sali.IdSucursal equals sucu.IdSucursal
-                               where sali.Activo == true
+                               join usua1 in _unitOfWork.Repository<Usuario>().AsQueryable()
+                               on sali.IdUsuario equals usua1.IdUsuario
+                               join usua2 in _unitOfWork.Repository<Usuario>().AsQueryable()
+                               on sali.IdUsuarioRecibe equals usua2.IdUsuario into usuaRecibeLeft
+                               from subUsuaRecibe in usuaRecibeLeft.DefaultIfEmpty()
                                select new SalidasInventarioListarDto
                                {
                                    IdSalidaInventario = sali.IdSalidaInventario,
@@ -44,8 +48,10 @@ namespace SistemaInventario._Features.Lotes
                                    Fecha = sali.Fecha,
                                    Total = sali.Total,
                                    IdUsuario = sali.IdUsuario,
+                                   NombreUsuario = usua1.Nombre,
                                    FechaRecibido = sali.FechaRecibido,
                                    IdUsuarioRecibe = sali.IdUsuarioRecibe,
+                                   Activo = sali.Activo,
                                    SalidasInventarioDetalles = _mapper.Map<List<SalidasInventarioDetalleDto>>(sali.SalidasInventarioDetalles)
                                }).ToList();
 
