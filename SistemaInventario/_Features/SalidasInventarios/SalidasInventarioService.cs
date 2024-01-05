@@ -112,7 +112,7 @@ namespace SistemaInventario._Features.Lotes
 
                     foreach (var item in productosDisponbles)
                     {
-                        var inventarioAEditar = _unitOfWork.Repository<Lote>().Where(x => x.IdLote == item.IdLote).FirstOrDefault();
+                        var inventarioAEditar = _unitOfWork.Repository<Lote>().FirstOrDefault(x => x.IdLote == item.IdLote);
 
                         if (inventarioAEditar != null)
                             inventarioAEditar.Inventario = item.Inventario;

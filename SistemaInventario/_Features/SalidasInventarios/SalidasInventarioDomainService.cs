@@ -76,8 +76,6 @@ namespace AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios
                 return Respuesta.Success(detalles);
 
             }
-
-
         }
     }
 }
