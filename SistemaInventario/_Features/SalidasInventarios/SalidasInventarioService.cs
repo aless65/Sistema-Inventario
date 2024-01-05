@@ -1,5 +1,5 @@
 ﻿using AcademiaFS.Proyecto.Inventario._Common;
-using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+using AcademiaFS.Proyecto.Inventario._Features.Auth.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios;
 using AcademiaFS.Proyecto.Inventario._Features.SalidasInventarios.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;

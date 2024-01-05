@@ -1,4 +1,4 @@
-﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dto;
+﻿using AcademiaFS.Proyecto.Inventario._Features.Auth.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.Inventario._Features.Usuarios;
 using AcademiaFS.Proyecto.Inventario._Features.Usuarios.Dtos;

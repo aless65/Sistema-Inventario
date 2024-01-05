@@ -1,4 +1,4 @@
-﻿namespace AcademiaFS.Proyecto.Inventario._Features.Auth.Dto
+﻿namespace AcademiaFS.Proyecto.Inventario._Features.Auth.Dtos
 {
     public static class DatosSesion
     {
